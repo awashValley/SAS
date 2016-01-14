@@ -6,3 +6,9 @@
               sheet   ="sheet_1"; 
               getnames=YES;
   run;
+
+## define file name as a macro variable
+  %let dlbIn = "&idbpath.\Final\Data\Indata\&indata.\&ddat";
+  
+  proc contents data=&dlbIn;
+  run;
