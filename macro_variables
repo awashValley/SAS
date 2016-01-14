@@ -1,0 +1,8 @@
+
+## concatenate macro variables
+%let sep_s =%str();
+%let val1 = value1;
+%let val2 = value2;
+
+%let fval = &val1&sep_s&val2;
+%put fval;
