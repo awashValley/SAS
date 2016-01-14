@@ -1,0 +1,8 @@
+
+## read Excel file into SAS
+  proc import datafile="&source\myfile.xlsx"
+              out     =work.mySasData
+              dbms    =xlsx replace;
+              sheet   ="sheet_1"; 
+              getnames=YES;
+  run;
