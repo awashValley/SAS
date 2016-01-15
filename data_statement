@@ -1,5 +1,5 @@
 
-## Initialize a variable 
+## [15JAN2016]. Initialize a variable 
   data random;
 	    length seedLs $ 20;
 		  retain seedLs;
@@ -8,7 +8,7 @@
   run;
   
   
-## Concatenate variable values in a loop
+## [15JAN2016]. Concatenate variable values in a loop 
 	data random;
 	  length seedLs $ 20;
 		retain seedLs;
