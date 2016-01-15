@@ -1,21 +1,24 @@
 
 ## [15JAN2016]. Initialize a variable 
-  data random;
-	    length seedLs $ 20;
-		  retain seedLs;
+   data random;
+     length seedLs $ 20;
+     retain seedLs;
 		  
-		  /* DO z JOB */
-  run;
+     /* DO z JOB */
+   run;
   
   
-## [15JAN2016]. Concatenate variable values in a loop 
-	data random;
-	  length seedLs $ 20;
-		retain seedLs;
+## [15JAN2016]. Concatenate variable values within a loop 
+   data random;
+     * initialize the variable (to be concatenated). ;
+     length seedLs $ 20;
+     retain seedLs;
 
-	 	%do i=1 %to &max;
-			random_int = int(ranuni(&seed) * &nRec + 0);
-			seedLs = catx(" ", random_int, seedLs);
-	 	%end;
-		call symput("seedLs", seedLs);
-	run;
+     %do i=1 %to &max;
+       random_int = int(ranuni(&seed) * &nRec + 0);
+       seedLs = catx(" ", random_int, seedLs);
+     %end;
+     
+     * create a macro variable. ;
+     call symput("seedLs", seedLs);
+   run;
