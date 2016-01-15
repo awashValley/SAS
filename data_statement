@@ -1,0 +1,21 @@
+
+## Initialize a variable 
+  data random;
+	    length seedLs $ 20;
+		  retain seedLs;
+		  
+		  /* DO z JOB */
+  run;
+  
+  
+## Concatenate variable values
+	data random;
+	  length seedLs $ 20;
+		retain seedLs;
+
+	 	%do i=1 %to &max;
+			random_int = int(ranuni(&seed) * &nRec + 0);
+			seedLs = cats(random_int, seedLs);
+	 	%end;
+		call symput("seedLs", seedLs);
+	run;
