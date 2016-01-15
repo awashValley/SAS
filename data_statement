@@ -15,7 +15,7 @@
 
 	 	%do i=1 %to &max;
 			random_int = int(ranuni(&seed) * &nRec + 0);
-			seedLs = cats(random_int, seedLs);
+			seedLs = catx(" ", random_int, seedLs);
 	 	%end;
 		call symput("seedLs", seedLs);
 	run;
