@@ -8,7 +8,7 @@
   run;
   
   
-## Concatenate variable values
+## Concatenate variable values in a loop
 	data random;
 	  length seedLs $ 20;
 		retain seedLs;
