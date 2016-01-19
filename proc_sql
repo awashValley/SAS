@@ -1,7 +1,0 @@
-
-## How to get row numbers in SAS proc sql;
-  proc sql;
-    select *, monotonic() as obs_count
-	  from &dlbIn
-    where calculated obs_count=100;
-  quit;
