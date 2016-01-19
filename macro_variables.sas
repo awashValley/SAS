@@ -1,5 +1,5 @@
 
-## concatenate macro variables
+* concatenate macro variables. ;
   %let sep_s =%str();
   %let val1 = value1;
   %let val2 = value2;
@@ -7,7 +7,7 @@
   %let fval = &val1&sep_s&val2;
   %put fval;
   
-## loop over a list in macro variable
+* loop over a list in macro variable. ;
   %macro validMacro_all(domains=);
   
   /*  %do i = 1 %by 1 %while(%scan(&domians, i) ne '');*/
