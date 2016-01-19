@@ -34,5 +34,5 @@ data work.code;
   length code $ 200;
   set work.contents;
   code = cats('%getLongestVal(ds=idb.', memname, ', var=', name, ');');
-  call execute(code);   * to call and the macro with different data and variable name;
+  call execute(code);   * to call and run the macro for each data set per variable name;
 run;
