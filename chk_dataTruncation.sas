@@ -1,7 +1,7 @@
 
 /*  ---------------------- */
 /*  Check Data Truncation  */
-/*     19JAN2015	   */
+/*     19JAN2016	   */
 /*  ---------------------- */
 %macro getLongestVal(ds=, var=);
 
