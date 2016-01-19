@@ -1,5 +1,5 @@
 
-## [15JAN2016]. Initialize a variable 
+* [15JAN2016]. Initialize a variable. ;
    data random;
      length seedLs $ 20;
      retain seedLs;
@@ -8,7 +8,7 @@
    run;
   
   
-## [15JAN2016]. Concatenate variable values within a loop 
+* [15JAN2016]. Concatenate variable values within a loop. ;
    data random;
      * initialize the variable (to be concatenated). ;
      length seedLs $ 20;
@@ -23,5 +23,5 @@
      call symput("seedLs", seedLs);
    run;
    
-   ## REMARK: You can't create a macro variable and with CALL SYMPUT and use it in the same DATA step
-   ##	      because SAS doesn't assign a value to the macro variable until the DATA step excutes.
+   /* REMARK: You can't create a macro variable and with CALL SYMPUT and use it in the same DATA step
+   	      because SAS doesn't assign a value to the macro variable until the DATA step excutes. */
