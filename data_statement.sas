@@ -25,3 +25,14 @@
    
    /* REMARK: You can't create a macro variable and with CALL SYMPUT and use it in the same DATA step
    	      because SAS doesn't assign a value to the macro variable until the DATA step excutes. */
+   	      
+   	      
+* [27JAN2016]. read data using macro variable. ;
+  libname mylib "&idpath.\Analysis\";
+  %let ddat = dm;
+  
+  data test;
+    length agegrp   $5;	
+    set mylib.&ddat(keep  =&keepvars_dm
+	            rename=(&renamevars_dm));
+  run;
