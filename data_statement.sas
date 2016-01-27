@@ -33,3 +33,11 @@
 
   proc print data=dlbIn.infecdd(obs=5);
   run; 
+  
+* [27JAN2016]. remove all formats, labels, informats. ;
+  proc datasets lib=<your library> memtype=data nolist;
+    modify <your dataset>; 
+      attrib _all_ label=' '; 
+      attrib _all_ format=;
+      attrib _all_ informat=;
+  run;
