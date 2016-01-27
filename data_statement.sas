@@ -28,11 +28,8 @@
    	      
    	      
 * [27JAN2016]. read data using macro variable. ;
-  libname mylib "&idpath.\Analysis\";
-  %let ddat = dm;
-  
-  data test;
-    length agegrp   $5;	
-    set mylib.&ddat(keep  =&keepvars_dm
-	            rename=(&renamevars_dm));
-  run;
+  %let block =%str(survival\data);
+  libname dlbIn "&mpath.\&block";  
+
+  proc print data=dlbIn.infecdd(obs=5);
+  run; 
