@@ -11,3 +11,9 @@
     SET &dlbn;
     IF _n_ = &seed;
   RUN;
+
+ * the option 'separated by'. ;
+ proc sql noprint;
+   select distinct name into: val&i separated by " "
+      from customer(where=(sqn=&i));
+ quit;
