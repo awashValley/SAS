@@ -26,3 +26,7 @@ if     varyr ^=.
 	                   vardtn=mdy(varmth, varday, varyr);
                       end;
 end;
+
+* charater date to SAS date (version 2). ;
+  if   length(vardt)=10 then vardtn=mdy(substr(vardt, 6, 2), substr(vardt, 9, 2), substr(vardt, 1, 4));
+  else                       vardtn=.;
