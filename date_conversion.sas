@@ -24,4 +24,5 @@ if     varyr ^=.
                                    || "-" || translate(put(varmth, 2.), "0", " ")
 			           || "-" || translate(put(varday, 2.), "0", " ");
 	                   vardtn=mdy(varmth, varday, varyr);
-                                      end;
+                      end;
+end;
