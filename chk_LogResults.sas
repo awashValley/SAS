@@ -25,7 +25,7 @@ filename alllogs;
     input line $;
     
     * trancate lengthy name. ;
-/*	filename = tranwrd("&filename", "&rootfolder", "");*/
+    filename = tranwrd("&filename", "&rootfolder", "");
   run;
 
   filename logres;
