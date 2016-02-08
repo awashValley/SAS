@@ -1,8 +1,8 @@
 %let rootfolder=C:\_tmp;
 
 * use doble quote to scape. ;
-* '/s' for include all subfolders. ;
-* '/b' for important files (it ignores details). ;
+* '/s' to get access to subfolders. ;
+* '/b' to get files only. ;
 filename alllogs pipe "dir /s /b ""&rootfolder.\*.log""";
 
 data work.alllogs;
