@@ -17,3 +17,10 @@
    select distinct name into: val&i separated by " "
       from customer(where=(sqn=&i));
  quit;
+ 
+ * create sas data set;
+ proc sql noprint;
+  create table work.contents as
+  select distinct memname
+  from contents;
+ quit;
