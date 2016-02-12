@@ -5,3 +5,6 @@
 	                                   input(substr(varChar, 9, 2), 8.), 
 	                                   input(substr(varChar, 1, 4), 8.));
    else                         varNum=.;
+   
+   
+/* [12FEB2016] Becareful using NODUPKEY option in PROC sort. */
