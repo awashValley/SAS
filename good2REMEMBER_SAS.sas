@@ -9,4 +9,4 @@
    
 /* [12FEB2016] Becareful using NODUPKEY option in PROC sort. */
 
-/* trim() vs strip(): the later is preferred if we want to trim front and back white spaces. */
+/* [12FEB2016] TRIM() vs STRIP(): the later is preferred if we want to trim front and back white spaces. */
