@@ -10,3 +10,5 @@
 /* [12FEB2016] Becareful using NODUPKEY option in PROC sort. */
 
 /* [12FEB2016] TRIM() vs STRIP(): the later is preferred if we want to trim front and back white spaces. */
+
+/* [15FEB2016] check always date derivation is done correctly. Compare source data set against the target data set. */
