@@ -14,17 +14,17 @@
 /* [15FEB2016] try to check always if derivation of date from the source data set is done correctly and successfully. 
                - [How to do it?] compare source data set against the target data set. 
                - [It could go wrong?] The following derivation, for example, is wrong since only year information is available 
-                  for the variable "visity". 
+                  for the variable "visity".  */
                  
                         if   visity^=. then vardt=          substr(put(visity, mmddyy10.), 7, 4)
                                                   || "-" || substr(put(visity, mmddyy10.), 1, 2)
                                                   || "-" || substr(put(visity, mmddyy10.), 4, 2);
 	                else                vardt=" ";
 	        
-	        - The above derivation assumes there are values for the day, month and year. However, the variable "visity" has 
-	          only the year value (e.g., visity=1976). In that case, the correct derivation should be
+	        /* The above derivation assumes there are values for the day, month and year. However, the variable "visity" has 
+	          only the year value (e.g., visity=1976). In that case, the correct derivation should be */
 	          	
 	          	if   visity^=. then vardt=put(visity, 4.);
 	                else                vardt=" ";
                  
-                 */
+                 
