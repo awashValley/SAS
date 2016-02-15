@@ -21,7 +21,7 @@
                                                   || "-" || substr(put(visity, mmddyy10.), 4, 2);
 	                else                vardt=" ";
 	        
-	        /* The above derivation assumes there are values for the day, month and year. However, the variable "visity" has 
+	        /* [How to fix it?] The above derivation assumes there are values for the day, month and year. However, the variable "visity" has 
 	          only the year value (e.g., visity=1976). In that case, the correct derivation should be */
 	          	
 	          	if   visity^=. then vardt=put(visity, 4.);
