@@ -1,2 +1,6 @@
 ## findstr - command prompt
    How to find specific data set names using a pattern or search.txt?
+   
+## Compare the contents of two sas/text files using SAS
+   [check your finding against WinMerge apps]
+   [Tips: use windows regular expression, pipe, etc]
