@@ -1,0 +1,8 @@
+## [22FEB2016]
+  1. %put ERROR: Excel file was not able to be read...
+  2. Specify the libname "work" always for documentation reason, e.g., "work.dataxyz".
+  3. Use the potential of Excel program for checking if SAS properly reads your data ("handig").
+  4. Try your best to make your macro generic as possible.
+  5. Macro parameters: [M] for mandatory and [O] for optional
+  6. PROC compare
+  
