@@ -21,4 +21,9 @@
   %let domains = a b c d e;
   %validMacro_all(domains=&domains);
 
+* usage of macro variable as libname. Double dots are used. ;
+  proc sort data=allformats
+            out =&outlib..allformats;
+    by name value;
+  run;
 
