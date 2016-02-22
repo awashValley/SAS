@@ -21,7 +21,8 @@
   %let domains = a b c d e;
   %validMacro_all(domains=&domains);
 
-* usage of macro variable as libname. Double dots are used. ;
+/* usage of macro variable as libname. Double dots are used, i.e., 
+   the first dot is for ending the macro variable and the other is for accessing the data. */
   proc sort data=allformats
             out =&outlib..allformats;
     by name value;
