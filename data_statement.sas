@@ -41,3 +41,14 @@
       attrib _all_ format=;
       attrib _all_ informat=;
   run;
+  
+ * [23FEB20016] Create data set with missing values. ;
+   data work.test;
+     length a $ 20
+            b 8
+            c 3
+	    d $ 40
+	    e 8;
+    format a $10.;
+    call missing(of _all_);
+  run;
