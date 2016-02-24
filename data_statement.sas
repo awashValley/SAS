@@ -42,7 +42,7 @@
       attrib _all_ informat=;
   run;
   
- * [23FEB20016] Create data set with missing values. ;
+ * [23FEB2016] Create data set with missing values. ;
    data work.test;
      length a $ 20
             b 8
@@ -52,3 +52,6 @@
     format a $10.;
     call missing(of _all_);
   run;
+  
+ * [24FEB2016] Create a variable with missing value. ;
+   varTest=.c;
