@@ -24,3 +24,19 @@
   select distinct memname
   from contents;
  quit;
+ 
+ * [25FEB2016] Multiple SELECT. ;
+   proc sql noprint;
+     select count(*)
+     into :numberofrecords
+     from work.cntlfmt;
+
+     select count(distinct(fmtname))
+     into :numberofformats
+     from work.cntlfmt;
+
+     select label
+     into :longestlabel
+     from work.cntlfmt
+     having length(label) = max(length(label));
+  quit;
