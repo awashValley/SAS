@@ -55,3 +55,21 @@
   
  * [24FEB2016] Create a variable with missing value. ;
    varTest=.c;
+
+ * [25FEB2016] Create data set without CARDS. ;
+   data work.results;
+     length test result $200;
+
+     test = "Number of records"; 
+     result = strip("&numberofrecords."); 
+     output;
+
+     test = "Number of formats"; 
+     result = strip("&numberofformats."); 
+     output;
+
+     test = "Longest label"; 
+     result = strip("&longestlabel."); 
+     output;
+
+run;
