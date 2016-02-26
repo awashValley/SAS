@@ -27,4 +27,19 @@
             out =&outlib..allformats;
     by name value;
   run;
+  
+* file names which has a space (e.g., my data.csv). ;
+   %let path     =C:\Users\...;
+   %let filepath =my data.csv;
+   
+   %macro readCSV(file, ds);
+      data &ds.;
+        infile "&path.\&file." dsd dlm="," missover lrecl=32767 firstobs=2;
+        length ...;
+        input ...;
+      run;
+  %mend readCSV;
+  
+  /* Read the file. */
+  %readCSV(&filepath, test);
 
