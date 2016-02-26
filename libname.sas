@@ -6,3 +6,8 @@
 *------------------------------------------------------------------------;
 libname mylib "%sysfunc(pathname(work))";
 %include "&path.\testMacro.sas";
+
+
+/* [26FEB2016] Define the PC Files engine library. 
+   Why we need the option "pcfiles" */
+  libname mylib pcfiles path="&path.\&fileTest.";
