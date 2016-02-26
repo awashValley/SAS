@@ -28,7 +28,7 @@
     by name value;
   run;
   
-* file names which has a space (e.g., my data.csv). ;
+* [26FEB2016] file names which has a space (e.g., my data.csv). ;
    %let path     =C:\Users\...;
    %let filepath =my data.csv;
    
