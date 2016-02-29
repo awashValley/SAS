@@ -1,5 +1,8 @@
-/* Paper AD20: Catch the Bad Guys!!!
-   A Utility Program to Check SAS®Log Files Amit Baid, ICON Clinical Research, Smyrna, GA */
+/* 
+  --- Paper AD20: Catch the Bad Guys!!! ---
+  --- A Utility Program to Check SAS®Log Files ---
+  --- Amit Baid, ICON Clinical Research, Smyrna, GA --- 
+*/
 
 
 %macro scanlog (path=);
