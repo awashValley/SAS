@@ -30,5 +30,5 @@ run;
               out=work.raw1 
               dbms=dlm replace;
     delimiter = '09'x; 
-    getnames = YES;
+    getnames = yes;
   run;
