@@ -20,3 +20,15 @@
   
 proc contents data=&dlbIn;
 run;
+
+
+* [08MAR2016] read text file using macro variable. ;
+  libname  input  "&rawfolder" access=readonly;
+  filename readin "&rawfolder\&rawinput";
+
+  proc import datafile=readin 
+              out=work.raw1 
+              dbms=dlm replace;
+    delimiter = '09'x; 
+    getnames = YES;
+  run;
