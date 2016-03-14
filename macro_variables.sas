@@ -42,4 +42,25 @@
   
   /* Read the file. */
   %readCSV(&filepath, test);
+  
+  /*[13:17 MON 14MAR2016]. Convert macro variables type and use it in conditional statement. 
+                           The "SYSEVALF" function. */
+    proc sql noprint;
+      select max(age) into :max_age
+      from work.out_summary;
+    quit;
+  
+    %let max_age =%sysevalf(&max_age);
+
+    * Define amount of change on y-axis. ;
+    %if %sysevalf(&max_age > 700) %then 
+    %do;
+      /* do something. */
+    %end;
+    %else 
+    %do;
+      /* do something. */
+    %end;
+  
+  
 
