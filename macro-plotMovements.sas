@@ -1,4 +1,4 @@
-/* [12MAR2016]. Movements of subjects over time per group. */
+/* [13:22 MON 14MAR2016]. Movements of subjects over time per group. */
 
 %macro plotMovements(sdata     =
                     ,interval  =
@@ -7,7 +7,7 @@
                     ,gender    =
                     ,parameter =);
 
-  * Get number of groups. ;
+  * Get total number of groups. ;
   proc sql noprint;
     select count(distinct &covariate.) into :num_groups
     from &sdata.;
@@ -25,6 +25,7 @@
     by &covariate &interval;
   run;
 
+  * Get mean response variable name. ;
   proc contents data=work.out_summary
                   out =work.contents (keep  = name label
                                       rename=(label=labell))
@@ -37,6 +38,23 @@
     where upcase(labell) ="MEAN";
   quit;
 
+  * Get maximum counts to be used later for plotting y-axis. ;
+  proc sql noprint;
+    select max(&mean_label)+200 into :max_counts
+    from work.out_summary;
+  quit;
+
+  %let max_counts =%sysevalf(&max_counts);
+
+  * Define amount of change on y-axis. ;
+  %if %sysevalf(&max_counts > 700) %then 
+  %do;
+    %let by_breaks =200;
+  %end;
+  %else 
+  %do;
+    %let by_breaks =100;
+  %end;
 
   * Start plot. ;
   goptions reset=all;
@@ -61,18 +79,18 @@
   * Define axis characteristics. ;                                                                      
   axis1 label =(font=verdana "Interval (5 min.)");
   axis2 label =(angle=90 font=verdana "Counts")
-        order =(0 to 1300 by 200);      /* Temporary */   
+        order =(0 to &max_counts by &by_breaks);         
 
   * Plot animal movements per group. ;
   proc gplot data=work.out_summary;
     plot &mean_label*&interval = &covariate  / haxis=axis1 vaxis=axis2 legend=legend1;
   run;
 
-  quit;
-
   * Delete temporary data sets. ;
   proc datasets library=work;
     delete contents out_summary;
   run;
+
+  quit;
 
 %mend plotMovements;
