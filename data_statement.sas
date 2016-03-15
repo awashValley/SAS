@@ -71,5 +71,30 @@
      test = "Longest label"; 
      result = strip("&longestlabel."); 
      output;
+    run;
+    
+ * [MON 15Mar2016 10:15]. Reshape long to wide. ;
+   proc sort data=work.long out=work.long_sort;
+     by id;
+   run;
 
-run;
+   data wide1;
+     set long_sort;
+     by id;
+
+     keep id treatment resp1 - resp12;
+     retain resp1 - resp12;
+
+     array aresp(1:12) resp1 - resp12;
+
+     if first.id then
+     do;
+       do i = 1 to 12;
+         aresp(i) =.;
+       end;
+     end;
+
+     aresp(time) =resp;
+
+     if last.id then output;
+   run;
