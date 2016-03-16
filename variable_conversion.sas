@@ -10,4 +10,4 @@
     set work.test(rename= (interval =_interval));
 
     interval =put(_interval, 2.);
-run;
+  run;
