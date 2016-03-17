@@ -40,3 +40,10 @@
      from work.cntlfmt
      having length(label) = max(length(label));
   quit;
+  
+* [Thur 17Mar2016]. Add a new variable. ;
+  proc sql noprint;
+    create table myTable as
+    select var1, var2, "hello" as var3_fromScratch
+    from work.test;
+  quit;
