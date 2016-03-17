@@ -98,3 +98,13 @@
 
      if last.id then output;
    run;
+   
+* [Thur 17Mar2016]. Get smallest values among variables. ;
+  DATA two;
+    SET one;
+    ARRAY nums [*] a b c d e;
+    lowest=MIN(a, b, c, d, e);
+    DO i=1 TO DIM(nums);
+      IF nums[i]=lowest THEN lowestvar=VNAME(nums[i]);
+    END;
+  RUN;
