@@ -9,4 +9,10 @@
         /* do sth. */
       end;
     run;
+    
+    
+/* [Fri 18Mar2016]. SAS macro sometimes doesn't run after some line. WHY? 
+                    - I found that my macro name was renamed, but I forgot to change the old macro name in "%include(old_macro_name)". 
+                    - The reason why SAS still runs without any errors and warnings, becuase SAS can still see and run the program in the old macro name. 
+                    - Thus, the solution is to change the old macro name in the "%include(old_macro_name)" statement. */
 
