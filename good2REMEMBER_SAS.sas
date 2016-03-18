@@ -28,3 +28,16 @@
 	                else                vardt=" ";
                  
                  
+/* [Fri 18Mar2016]. Use percent(%) before IF statment whenever we evaluate a macro variable inside DATA statement. */
+   data work.temp;
+     set work.test;
+
+     %if %lowcase(&criterion) Eq bic %then
+     %do;
+      where index(lowcase(Descr), "bic (smaller is better)") > 0;
+     %end;
+     %else
+     %do;
+       where index(lowcase(Descr), "&criterion. (smaller is better)") > 0;
+     %end;
+   run;
