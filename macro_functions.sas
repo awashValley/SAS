@@ -17,8 +17,8 @@
       %do;	/* use default value */
         where index(lowcase(Descr), "bic (smaller is better)") > 0;
       %end;
-      %else	/* if the user provides a value */
-      %do;
+      %else	
+      %do;	/* apply user's value */
         where index(lowcase(Descr), "&criterion. (smaller is better)") > 0;
       %end;
     run;
