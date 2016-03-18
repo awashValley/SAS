@@ -22,3 +22,5 @@
         where index(lowcase(Descr), "&criterion. (smaller is better)") > 0;
       %end;
     run;
+    
+  %mend  compareCovariances;
