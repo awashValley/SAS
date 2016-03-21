@@ -16,7 +16,7 @@
                     - The reason why SAS still runs without any errors and warnings, becuase SAS can still see and run the program in the old macro name. 
                     - Thus, the solution is to change the old macro name in the "%include(old_macro_name)" statement. */
 
-/* [Fri 21Mar2016]. Don't compare macro variable value with another value within a quotation. Rather, remove the quotation. */
+/* [Mon 21Mar2016]. Don't compare macro variable value with another value within a quotation. Rather, remove the quotation. */
    %let transf =none;
    
    %if       %upcase(&transf) ="NONE"  %then /* do something. */;    /* WRONG!!! */
