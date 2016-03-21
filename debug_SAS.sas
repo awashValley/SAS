@@ -25,7 +25,7 @@
 
 
 /* [Mon 21Mar2016]. Don't forget to close the macro. */
-   %if       %upcase(&transf) =NONE  %then transf_response =response;   /* WRONG since SAS expects the macro to be close. 
+   %if       %upcase(&transf) =NONE  %then transf_response =response;   /* WRONG since SAS expects the macro to be closed. 
                                                                              Then, SAS checks macro issues and continue with excustion. */
    
    %if       %upcase(&transf) =NONE  %then 
