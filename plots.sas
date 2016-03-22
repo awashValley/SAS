@@ -9,7 +9,7 @@
   run;
   
   
-* [Tue 22Mar2016]. Send plots to external location. ;
+* [Tue 22Mar2016]. Save residual plots on external device. ;
   ods results off;
 
   ods graphics on /reset=index imagename="residual_plots" 
