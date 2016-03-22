@@ -10,7 +10,7 @@
   
 
 
-/* [Tue 22Mar2016]. Plot graphs using GPLOT */
+* [Tue 22Mar2016]. Plot graphs using GPLOT. ;
    goptions reset=all;
 
    * Define the title. ;                                                                                                    
