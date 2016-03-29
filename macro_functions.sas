@@ -24,3 +24,7 @@
     run;
     
   %mend  compareCovariances;
+  
+* [Tue 29Mar2016]. Loop over string values. ;
+  %let cov_list =%str(cs csh toep toeph ar1 ar1h); 
+  %let count    =%sysfunc(countw(&cov_list));
