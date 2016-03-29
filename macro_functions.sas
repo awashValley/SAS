@@ -27,13 +27,13 @@
   
 * [Tue 29Mar2016]. Loop over string values (source: http://support.sas.com/kb/26/155.html). ;
   %macro test;
-  %let cov_list =%str(cs,csh,toep,toeph,ar(1),arh(1)); 
-  %let count    =%sysfunc(countw(&cov_list)); 
+    %let cov_list =%str(cs,csh,toep,toeph,ar(1),arh(1)); 
+    %let count    =%sysfunc(countw(&cov_list)); 
 
-  %do i=1 %to &count;
-    %let value = %qscan(&cov_list, &i, %str(,));                                                                                            
-    %put &value; 
-  %end;
+    %do i=1 %to &count;
+      %let value = %qscan(&cov_list, &i, %str(,));                                                                                            
+      %put &value; 
+    %end;
   %mend test;
 
   %test;
