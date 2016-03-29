@@ -27,7 +27,6 @@
   
 * [Tue 29Mar2016]. Loop over string values (source: http://support.sas.com/kb/26/155.html). ;
   %macro loop(values);    
-                                                                                                                
     /* Count the number of values in the string */                                                                                                                                   
     %let count=%sysfunc(countw(&values)); 
 
