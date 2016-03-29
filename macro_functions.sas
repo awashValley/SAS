@@ -25,6 +25,19 @@
     
   %mend  compareCovariances;
   
-* [Tue 29Mar2016]. Loop over string values. ;
-  %let cov_list =%str(cs csh toep toeph ar1 ar1h); 
-  %let count    =%sysfunc(countw(&cov_list));
+* [Tue 29Mar2016]. Loop over string values (source: http://support.sas.com/kb/26/155.html). ;
+  %macro loop(values);    
+                                                                                                                
+    /* Count the number of values in the string */                                                                                                                                   
+    %let count=%sysfunc(countw(&values)); 
+
+    /* Loop through the total number of values */                                                                                         
+    %do i = 1 %to &count;                                                                                                              
+      %let value=%qscan(&values,&i,%str(,));                                                                                            
+      %put &value;                                                                                                                      
+    %end;                                                                                                                              
+  %mend;                                                                                                                                  
+                                                                                                                                        
+  /* %STR is used to mask the commas from the macro compiler when */                                                                      
+  /* the macro %LOOP is called.                                   */                                                                      
+  %loop(%str(2,3,5,7,11,13,17)) 
