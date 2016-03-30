@@ -37,4 +37,13 @@
   %mend test;
 
   %test;
+  
+
+* [Wed 30Mar2016]. Create macro variables within data statement. ;
+  data work.test;
+    set work.tmp;
+  
+    call symput("studynum" || compress(put(i, 8.)), trim(studynum));
+run;
+
 
