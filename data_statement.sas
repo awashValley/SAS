@@ -108,3 +108,11 @@
       IF nums[i]=lowest THEN lowestvar=VNAME(nums[i]);
     END;
   RUN;
+
+
+* [Fri 01Apr2016]. Create empty data set (source: Raymond Ebben - www.info-net.nl/create-an-empty-dataset.html). ;
+  data work.combined;
+    set work.sample;
+    /* Make sure that no records will be outputted */
+    stop;
+  run;
