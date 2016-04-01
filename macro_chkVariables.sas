@@ -14,9 +14,9 @@ run;
 %let mpath   =%str(C:\tmp);
 %let usrData   =%str(C:\tmp\mrx);
 
-libname I201_001 "&mpath.\old_database";
+libname old_database "&mpath.\old_database";
 
-libname S2013121 "&mpath.\new_study";
+libname new_study "&mpath.\new_study";
 
 %macro variablecheck(lib=);
 	proc contents data   =&lib.._all_
