@@ -31,3 +31,14 @@
    %if       %upcase(&transf) =NONE  %then 
    %do;  transf_response =response;
    %end;                                                                /* CORRECT!!!*/
+   
+   
+/* [01APR2016]. Error: File Name value exceeds maximum length of 201 characters.
+                Solution: This occurs when we specify the filename path in "datafile" directly. Thus, use the "filename" option. */
+   filename ff "&dir.\&first_file";
+
+   proc import datafile  =ff
+                 out     =work.sample
+                dbms     =csv replace;             
+                getnames =YES;
+   run;
