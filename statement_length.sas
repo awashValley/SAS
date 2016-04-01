@@ -9,7 +9,9 @@
   quit;
 
   data work.combined;
-    length &names $200;
+    length   &names $100;
+    format   &names $100.;
+    informat &names $100.;
     set work.sample;
-    stop;
+    stop;   /* helps to create empty dataset. */
   run;
