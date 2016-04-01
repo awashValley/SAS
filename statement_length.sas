@@ -1,5 +1,5 @@
 
-/* [Fri 01Apr2016]. Set lengths of only character variables at once 
+/* [Fri 01Apr2016]. Set the length of all character variables at once.
   (source: http://stackoverflow.com/questions/35460055/setting-the-length-of-all-character-variables-within-a-dataser). */
   
   proc sql;
