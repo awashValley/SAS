@@ -47,3 +47,9 @@
     select var1, var2, "hello" as var3_fromScratch
     from work.test;
   quit;
+
+* [Fri 01APR2016]. Get the first obs. ;
+  proc sql noprint;
+    select filename into: first_file
+    from work.dirlist (obs=1);
+  quit;
