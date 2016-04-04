@@ -135,6 +135,6 @@
     length Type LogRes $10;
     set work.test;
     Type = "&cov_type";
-    LogRes =symget('logRes');
+    LogRes =symget(strip('logRes'));
   run;
 
