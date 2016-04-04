@@ -129,4 +129,12 @@
     select count(*) into :obs 
     from work.logres;
   quit;
+  
+* [Mon 04Apr2016]. SYMGET function. Don't forget to use quotation. ;
+  data work.test;
+    length Type LogRes $10;
+    set work.test;
+    Type = "&cov_type";
+    LogRes =symget('logRes');
+  run;
 
