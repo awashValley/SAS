@@ -116,3 +116,10 @@
     /* Make sure that no records will be outputted */
     stop;
   run;
+  
+* [Mon 04Apr2016]. Get empty datasets.;
+  proc sql;
+    select memname into :dellist separated by ' ' 
+    from dictionary.tables 
+    where libname='WORK' and nobs=0;
+  quit;
