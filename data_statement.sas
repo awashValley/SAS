@@ -123,3 +123,10 @@
     from dictionary.tables 
     where libname='WORK' and nobs=0;
   quit;
+  
+* [Mon 04Apr2016]. Number of observations in a dataset (or if it is empty). ;
+  proc sql noprint;
+    select count(*) into :obs 
+    from work.logres;
+  quit;
+
