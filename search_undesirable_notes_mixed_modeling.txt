@@ -1,0 +1,12 @@
+but final hessian is not positive definite
+Estimated G matrix is not positive definite
+Estimated R matrix is not positive definite
+Asymptotic variance matrix of covariance parameter estimates has been found to be singular
+An infinite likelihood is assumed
+A linear combination of covariance
+At least one element of the (projected) gradient is greater than
+Stopped because of too many likelihood evaluations
+MIVQUE0 estimate of profiled variance
+Pseudo-likelihood update fails
+The initial estimates did not yield a valid objective function
+The final Hessian matrix is full rank but has at least one negative eigen value
