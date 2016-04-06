@@ -1,7 +1,6 @@
+
+* [Wed 06Apr2016]. Compare covariance structures. ;
 %macro compareCovariances;
-  /*******************************************************************************
-    Compare covariance structures.
-  *******************************************************************************/
 
   * Suppress ODS results. ;
   ods results off;
