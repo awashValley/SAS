@@ -43,7 +43,7 @@
   data work.preprocess_tmp1;
     set work.preprocess_tmp;
     
-    rownum = _n_;   /* TEMPORARY: consult the .NET developer */ 
+    rownum = _n_;   
   run;
 
   * Exclude record(s). ;
