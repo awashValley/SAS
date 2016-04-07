@@ -62,5 +62,23 @@
     /* do something. */
   %end;
   
+* [Thur 07Apr2016]. Evaluate not missing macro variable. Use a quotation in the %LET. ;
+  %let exclSubject =%str(&id IN (2));    /* Doesn't work since SAS can not evaluate IN operator in the IF condition. */
+  %let exclSubject =%str("&id IN (2)");  /* Hola */
+  
+  %macro test;
+
+    %if &exclSubject NE %then
+    %do;
+      %put ### Not empty;
+    %end;
+    %else
+    %do;
+      %put ### empty;
+    %end;
+  %mend  test;
+
+  %test;
+  
   
 
