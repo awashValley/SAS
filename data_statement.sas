@@ -137,4 +137,11 @@
     Type = "&cov_type";
     LogRes =symget(strip('logRes'));
   run;
+  
+* [Thur 07Apr2016]. Create missing variable. ;
+  data work.test;
+    set work.orig;
+    call missing(exclusion);
+  run;
+
 
