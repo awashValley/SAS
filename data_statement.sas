@@ -143,5 +143,19 @@
     set work.orig;
     call missing(exclusion);
   run;
+  
+* [Fri 08Apr2016]. Create a variable with alphabet characters. ;
+  data work.out1;
+    set work.out;
+
+    length v_i $1.;
+
+    by &group;
+    if first.&group then
+    do;
+      seq + 1;
+      v_i = byte(64 + _n_); 
+    end;
+  run;
 
 
