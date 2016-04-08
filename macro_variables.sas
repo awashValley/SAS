@@ -81,4 +81,16 @@
   %test;
   
   
+* [Fri 08Apr2016]. Concatenate macro variables. ;
+  proc sql noprint;
+    select cats(strip(' " '), catx(" ", 'Group', treatment), strip(' " ')) into :legend_all separated by ' ' 
+    from work.Out_summary_combined
+    ;
+
+    select count(treatment) into :num_groups
+    from work.Out_summary_combined
+    ;
+  quit;
+
+  
 
