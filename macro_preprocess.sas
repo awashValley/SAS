@@ -12,6 +12,17 @@
                           rename =(&parameter=response) );
   run;
 
+  * Create a label. ;
+  %if       %upcase(&parameter) = XYZ %then
+  %do;
+    %let label =%str(&label_xyz);
+  %end;
+  %else %if %upcase(&parameter) = ABC %then
+  %do;
+    %let label =%str(&label_abc);
+  %end;
+
+
   * Apply exclusion. ;
   %applyExclusion;
 
@@ -39,7 +50,7 @@
   - Otherwise, no exclusion will be applied.
 *******************************************************************************/
 
-  * Keep the row numbers of the dataset (in case needed). ;
+  * Keep row numbers of the dataset (in case needed). ;
   data work.preprocess_tmp1;
     set work.preprocess_tmp;
     
@@ -47,37 +58,23 @@
   run;
 
   * Exclude record(s). ;
-  %if        %upcase(&NET2SAS_exclSubjectChekBox) = CHECKED 
-      and    %upcase(&NET2SAS_exclBlockChekBox)   = CHECKED  %then
-  %do;
-    data work.preprocess_tmp1;
-      set work.preprocess_tmp1;
+  data work.preprocess_tmp1;
+    set work.preprocess_tmp1;
 
+    %if        %upcase(&NET2SAS_exclSubjectChekBox) = CHECKED 
+        and    %upcase(&NET2SAS_exclBlockChekBox)   = CHECKED  %then
+    %do;
       if ( (&exclSubjectList) or (&exclBlockList) )  then delete; 
-    run;
-  %end;
-  %else %if  %upcase(&NET2SAS_exclSubjectChekBox) = CHECKED  %then
-  %do;
-    data work.preprocess_tmp1;
-      set work.preprocess_tmp1;
-
+    %end;
+    %else %if  %upcase(&NET2SAS_exclSubjectChekBox) = CHECKED  %then
+    %do;
       if &exclSubjectList then delete; 
-    run;
-  %end;
-  %else %if %upcase(&NET2SAS_exclBlockChekBox)  = CHECKED  %then
-  %do;
-    data work.preprocess_tmp1;
-      set work.preprocess_tmp1;
-
+    %end;
+    %else %if  %upcase(&NET2SAS_exclBlockChekBox)  = CHECKED   %then
+    %do;
       if &exclBlockList then delete; 
-    run;
-  %end;
-  %else 
-  %do;
-    data work.preprocess_tmp1;
-      set work.preprocess_tmp1;
-    run;
-  %end;
+    %end;
+  run;
 
 %mend  applyExclusion;
 
