@@ -1,11 +1,25 @@
 
-* [Wed 06Apr2016]. Compare covariance structures. ;
+* [Thur 28Apr2016]. Compare covariance structures. ;
+
 %macro compareCovariances;
+  /*******************************************************************************
+    Compare covariance structures.
+  *******************************************************************************/
 
   * Suppress ODS results. ;
   ods results off;
+/*  ods listing close;*/
 
-  * Fit the candidate mixed models. ;
+  * Redefine interval variable as charachter variable. ;
+/*  data work.analydata_tmp (drop=_interval);*/
+/*    length interval $2;  * TEMPORARY;*/
+/*    *retain &retain_vars;*/
+/*    set work.analydata_tmp(rename= (interval =_interval));*/
+/**/
+/*    interval =put(_interval, 2.);*/
+/*  run;*/
+
+  * Fit different mixed models using candidate covariance structures. ;
   data out_fitAll;
     length Type LogRes $10 Neg2LogLike Parms AIC AICC BIC 8;
     call missing(of _all_);
@@ -14,29 +28,29 @@
   %let cov_list =%str(cs,csh,toep,toeph,arh(1),ar(1)); 
   %let count    =%sysfunc(countw(&cov_list, ",")); 
 
-  %do i=1 %to &count;
-    %let cov_type = %qscan(&cov_list, &i, %str(,)); 
+  %do j=1 %to &count;
+    %let cov_type = %qscan(&cov_list, &j, %str(,)); 
     
-    proc printto log="&logpath.\mixed_model_&cov_type..log" new;
+    proc printto log="&logpath.\mixed_model_&analyBy_label._&cov_type..log" new;
     run;
 
-    ods output InfoCrit=out_fitI;
-    proc mixed data=work.analydata_tmp method=REML ic;
-      class treatment interval animal;
-      model transf_response = treatment interval treatment*interval /ddfm=KenwardRoger;  /* TEMPORARY: ddfm */
-      repeated interval /subject=animal type=&cov_type;
+    ods output InfoCrit=out_fitJ;
+    proc mixed data=work.analydata_tmp (where= (&projectBy = "&analyBy")) method=REML ic;
+      class treatment &block &id;
+      model transf_response = treatment &block treatment*&block /ddfm=KenwardRoger;  /* TEMPORARY: ddfm */
+      repeated &block /subject=&id type=&cov_type;
     run;
 
     proc printto log=log;
     run;
 
     * check log file for undesirable notes (e.g., non-convergence). ;
-    %checkLog(logFile =mixed_model_&cov_type);
+    %checkLog(logFile =mixed_model_&analyBy_label._&cov_type);
 
     * Merge all results. ;
-    data work.out_fitI;
+    data work.out_fitJ;
       length Type LogRes $10;
-      set work.out_fitI;
+      set work.out_fitJ;
 
       Type   =symget(strip('cov_type'));
       LogRes =symget(strip('logRes'));
@@ -44,12 +58,12 @@
 
     data work.out_fitAll;
       set work.out_fitAll 
-          work.out_fitI (keep =Type LogRes Neg2LogLike Parms AIC AICC BIC);
+          work.out_fitJ (keep =Type LogRes Neg2LogLike Parms AIC AICC BIC);
       if Type = " " then delete;
     run;
   %end;
 
-  * Keep identified mixed models. ;
+  * Keep only the identified mixed models. ;
   data work.out_fitAll;
     set work.out_fitAll;
     where upcase(LogRes) = "LOGOK";
@@ -106,21 +120,21 @@
     array nums [*] &names;
     lowest = min(&names_comma);
 
-    do i=1 to dim(nums);
+    do k=1 to dim(nums);
 
-      if nums[i] = lowest then
+      if nums[k] = lowest then
       do;
-        if      upcase(vname(nums[i])) = "AR1" then 
+        if      upcase(vname(nums[k])) = "AR1" then 
         do;  
-          call symput("final_cov", substr(vname(nums[i]),1,2) || strip("(1)") );
+          call symput("final_cov", substr(vname(nums[k]),1,2) || strip("(1)") );
         end;
-        else if upcase(vname(nums[i])) = "ARH1" then 
+        else if upcase(vname(nums[k])) = "ARH1" then 
         do;  
-          call symput("final_cov", substr(vname(nums[i]),1,3) || strip("(1)") );
+          call symput("final_cov", substr(vname(nums[k]),1,3) || strip("(1)") );
         end;
         else
         do;
-          call symput("final_cov", strip(vname(nums[i])));
+          call symput("final_cov", strip(vname(nums[k])));
         end;
       end;
 
@@ -129,17 +143,15 @@
 
   %put ### Final covariance: &final_cov;
   %put ### Parameter: &parameter;
-  %put ### Analysis : &analyby;
+  %put ### Analysis : &analyBy;
   %put ### Criterion: &criterion;
 
-  * Delete temporary data sets. ;
-  proc datasets library=work;
+  * Delete temporary datasets. ;
+  proc datasets nolist library=work;
     delete 
-      final_ds fit_criterion out_fiti
-/*      out_fitall */
+      final_ds fit_criterion out_fitJ
+      out_fitall;
   run;
   quit;
 
 %mend  compareCovariances;
-
-%compareCovariances;
