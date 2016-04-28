@@ -1,40 +1,39 @@
 
-* [Thur 08Apr2016]. Preprocessing, i.e., exclusion and transformation.;
+* [Thur 28Apr2016]. Preprocessing, i.e., exclusion and transformation.;
 
 %macro preprocess;
 /*******************************************************************************
-  Preprocess the imported dataset.
+  Preprocess imported dataset.
 *******************************************************************************/
 
-  * Get imported dataset (only parameter of interest is kept).;
+  * Get imported dataset, only parameter of interest is kept. ;
   data work.preprocess_tmp;
     set work.combined_ds (keep   =&keep_vars_wtpars &parameter
                           rename =(&parameter=response) );
   run;
 
-  * Create a label. ;
-  %if       %upcase(&parameter) = XYZ %then
+  * Create label for a selected parameter. ;
+  %if       %upcase(&parameter) = abcd %then
   %do;
-    %let label =%str(&label_xyz);
+    %let label_parameter =%str(abcd efg);
   %end;
-  %else %if %upcase(&parameter) = ABC %then
+  %else %if %upcase(&parameter) = xyz %then
   %do;
-    %let label =%str(&label_abc);
+    %let label_parameter =%str(xyza);
   %end;
 
-
-  * Apply exclusion. ;
+  * Apply data exclusion. ;
   %applyExclusion;
 
   * Apply transformation. ;
   %applyTransformation;
 
-  * Create the dataset that would be used for analysis. ;
+  * Create analysis dataset. ;
   data work.analydata_tmp;
     set work.preprocess_tmp2;
   run;
 
-  * Delete temporary files. ;
+  * Delete temporary datasets. ;
   proc datasets nolist library=work;
     delete
       preprocess_tmp preprocess_tmp1 preprocess_tmp2;
@@ -50,7 +49,7 @@
   - Otherwise, no exclusion will be applied.
 *******************************************************************************/
 
-  * Keep row numbers of the dataset (in case needed). ;
+  * Keep row numbers, in case needed. ;
   data work.preprocess_tmp1;
     set work.preprocess_tmp;
     
@@ -61,18 +60,19 @@
   data work.preprocess_tmp1;
     set work.preprocess_tmp1;
 
-    %if        %upcase(&NET2SAS_exclSubjectChekBox) = CHECKED 
-        and    %upcase(&NET2SAS_exclBlockChekBox)   = CHECKED  %then
+    %if        %upcase(&frontEnd2SAS_exclSubjectChekBox) = CHECKED 
+        and    %upcase(&frontEnd2SAS_exclBlockChekBox)   = CHECKED  %then
     %do;
-      if ( (&exclSubjectList) or (&exclBlockList) )  then delete; 
+      if &exclSubjectList then delete; 
+      if &exclBlockList   then delete; 
     %end;
-    %else %if  %upcase(&NET2SAS_exclSubjectChekBox) = CHECKED  %then
+    %else %if  %upcase(&frontEnd2SAS_exclSubjectChekBox) = CHECKED  %then
     %do;
       if &exclSubjectList then delete; 
     %end;
-    %else %if  %upcase(&NET2SAS_exclBlockChekBox)  = CHECKED   %then
+    %else %if  %upcase(&frontEnd2SAS_exclBlockChekBox)   = CHECKED   %then
     %do;
-      if &exclBlockList then delete; 
+      if &exclBlockList   then delete; 
     %end;
   run;
 
@@ -82,7 +82,7 @@
 %macro applyTransformation;
   /*******************************************************************************
     Apply transforamtion, as defined by the user. 
-    - Otherwise, the application uses the default value "NONE".  
+    - Otherwise, no transformation will be applied.  
   *******************************************************************************/
 
   data work.preprocess_tmp2;
