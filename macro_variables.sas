@@ -92,5 +92,8 @@
     ;
   quit;
 
+* [Mon 09May2016]. Remove/replace separator. ;
+  %let dotNET2SAS_excluded_rows =3 * 5 * 8;		
+  %let excluded_rows 		        =%sysfunc(tranwrd(&dotNET2SAS_excluded_rows, *, %str()));
   
 
