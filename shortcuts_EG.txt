@@ -1,0 +1,5 @@
+
+* [Tue 10MAY2016]. Navigation
+                   - Source: http://support.sas.com/documentation/prod-p/eg/7.1/en/HTML/ega11y.htm#p0y5v4bux1f6een1786ownczqqmx. ;
+                        - Move through the tabs of the workspace when it is active:
+                          > Ctrl + Tab or Ctrl + Shift + Tab 
