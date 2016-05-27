@@ -60,10 +60,17 @@
 
 
 /*  [Fri 27May2016]. Boxplot with extreme values. */
+    axis2 label = (height = 1.25 "myvar") minor = none; 
     proc boxplot data=work.boxplot_ds;
-      plot &parameter*treatment = sex/ boxstyle=schematicid boxwidth=10 idsymbol=circle;
+      title "Boxplot for myvar";
+      plot age*treatment = sex/ boxstyle=schematicid 
+                                boxwidth=10 
+                                idsymbol=circle
+                                vaxis=axis2;
       id animal;
+
       by sex;
+      footnote "***The values on top of each boxplot indicates extreme values.";
     run;
     quit;
     
