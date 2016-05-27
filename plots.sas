@@ -57,3 +57,12 @@
   run;
   ods listing close;
   ods graphics off;  
+
+
+/*  [Fri 27May2016]. Boxplot with extreme values. */
+    proc boxplot data=work.boxplot_ds;
+      plot &parameter*treatment = sex/ boxstyle=schematicid boxwidth=10 idsymbol=circle;
+      id animal;
+      by sex;
+    run;
+    quit;
