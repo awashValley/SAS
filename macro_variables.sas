@@ -96,9 +96,8 @@
   %let dotNET2SAS_excluded_rows =3 * 5 * 8;		
   %let excluded_rows 		        =%sysfunc(tranwrd(&dotNET2SAS_excluded_rows, *, %str()));
   
-  
-  * [Wed 01MAY2016]. Concatenate macro variables. ;
-    %let logi =%sysfunc(compress(%sysfunc(catx(%str( ), %, &undesNote2, %))));
-    %put >>> logi: &logi; 
+* [Wed 01MAY2016]. Concatenate macro variables. ;
+  %let logi =%sysfunc(compress(%sysfunc(catx(%str( ), %, &undesNote2, %))));
+  %put >>> logi: &logi; 
   
 
