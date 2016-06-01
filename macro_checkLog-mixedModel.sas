@@ -34,22 +34,30 @@
     set work.log (where = (notes like '%NOTE%' or
                            notes like '%WARN%' or
                            notes like '%ERR%'));
-
-    findings =tranwrd(notes, 'NOTE: ', ' ');
   run;
 
+  * Check for undesirable notes in the imported log file. ;
   data logRes;
-    set log2 (where = (   findings like '%but final hessian is not positive definite%'  
-                       or findings like '%Estimated G matrix is not positive definite%' 
-                       or findings like '%Asymptotic variance matrix of covariance parameter estimates has been found to be singular%' 
-                       or findings like '%An infinite likelihood is assumed%' 
-                       or findings like '%A linear combination of covariance%' 
-                       or findings like '%A linear combination of covariance%' 
-                       or findings like '%At least one element of the (projected) gradient is greater than%' 
-                       or findings like '%Stopped because of too many likelihood evaluations%' 
-                       or findings like '%MIVQUE0 estimate of profiled variance%' 
-                       or findings like '%Pseudo-likelihood update fails%' or findings like '%The initial estimates did not yield a valid objective function%' 
-                       or findings like '%The final Hessian matrix is full rank but has at least one negative eigen value%')
+    set log2 (where = (   findings like '%NOTE: Convergence criteria met but final hessian is not positive definite.%'  
+                       or findings like '%NOTE: Estimated G matrix is not positive definite%' 
+                       or findings like '%NOTE: Asymptotic variance matrix of covariance parameter estimates has been found to be singular%' 
+                       or findings like '%NOTE: An infinite likelihood is assumed%' 
+                       or findings like '%NOTE: A linear combination of covariance%' 
+                       or findings like '%NOTE: At least one element of the (projected) gradient is greater than%' 
+                       or findings like '%WARNING: Stopped because of too many likelihood evaluations%' 
+                       or findings like '%WARNING: MIVQUE0 estimate of profiled variance%' 
+                       or findings like '%WARNING: Pseudo-likelihood update fails%' 
+											 or findings like '%WARNING: The initial estimates did not yield a valid objective function%' 
+                       or findings like '%WARNING: The final Hessian matrix is full rank but has at least one negative eigen value%' 
+                       or findings like '%ERROR: NEWRAP cannot improve the objective function.%' 
+                       or findings like '%ERROR: QUANEW Optimization cannot be completed.%' 
+                       or findings like '%ERROR: Quadrature accuracy of 0.000100 could not be achieved with 31 points. The achieved accuracy was 1.000000.%' 
+                       or findings like '%ERROR: Signal caught by CMP from PROC.%' 
+                       or findings like '%ERROR: Invalid Operation.%' 
+                       or findings like '%ERROR: Termination due to Floating Point Exception%' 
+                       or findings like '%ERROR: No Valid Parameter Points were found%' 
+                       or findings like '%ERROR: Termination due to Floating Point Exception%' 
+                       or findings like '%ERROR: Termination due to Floating Point Exception%')
                       );
 
   run;
