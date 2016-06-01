@@ -47,7 +47,7 @@
                        or findings like '%WARNING: Stopped because of too many likelihood evaluations%' 
                        or findings like '%WARNING: MIVQUE0 estimate of profiled variance%' 
                        or findings like '%WARNING: Pseudo-likelihood update fails%' 
-											 or findings like '%WARNING: The initial estimates did not yield a valid objective function%' 
+                       or findings like '%WARNING: The initial estimates did not yield a valid objective function%' 
                        or findings like '%WARNING: The final Hessian matrix is full rank but has at least one negative eigen value%' 
                        or findings like '%ERROR: NEWRAP cannot improve the objective function.%' 
                        or findings like '%ERROR: QUANEW Optimization cannot be completed.%' 
