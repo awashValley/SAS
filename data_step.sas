@@ -158,4 +158,12 @@
     end;
   run;
 
+* [Wed 01JUNE2016]. find and replace using TRANWRD. ;
+  data work.log2 (drop =findings);
+    set work.log (where = (findings like '%NOTE%' or
+                           findings like '%WARN%' or
+                           findings like '%ERR%'));
+
+    findings2 =tranwrd(findings, 'NOTE: ', ' ');
+  run;
 
