@@ -13,7 +13,7 @@
   Input       : - &logFile : the name of input log file. 
   Output      : - &logRes  : a macro variable with a value either "logNotOK" or
                              "logOK" depending on the search result for 
-														 undesirable notes.
+                             undesirable notes.
 ********************************************************************************
 
 
