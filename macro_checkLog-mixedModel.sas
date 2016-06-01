@@ -38,9 +38,6 @@
     findings =tranwrd(notes, 'NOTE: ', ' ');
   run;
 
-  * Check for undesirable notes in the imported log file. ;
-  %let logi =%sysfunc(compress(%sysfunc(catx(%str( ), %, &undesNote2, %))));
-
   data logRes;
     set log2 (where = (   findings like '%but final hessian is not positive definite%'  
                        or findings like '%Estimated G matrix is not positive definite%' 
