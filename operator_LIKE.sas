@@ -11,3 +11,15 @@
   
   * The above code would return "PERFPARMTEST_AMBULATIONS_M PERFPARMTEST_TOTAL_MOVEMENTS_M" form the list
     "PERFPARMTEST_AMBULATIONS_M PERFPARMTEST_TOTAL_MOVEMENTS_M PERFPARMTEST_AMBULATIONS_F PERFPARMTEST_TOTAL_MOVEMENTS_F" .;
+    
+    
+* [Thur 02JUN2016]. Using concatenation within LIKE operature.;
+  proc sql;
+      create table test3 as
+      select * from test1
+      left join test2
+            on a like '%'||strip(search)||'%'
+      ;
+  quit;
+
+  
