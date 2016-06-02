@@ -167,3 +167,10 @@
     findings2 =tranwrd(findings, 'NOTE: ', ' ');
   run;
 
+* [Thur 02JUN2016]. Calculate dates. ;
+  data work.test;
+    start = "07JAN2016"d;
+    end = start + 180;
+    put end date9.;
+  run;
+
