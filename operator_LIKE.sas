@@ -21,5 +21,14 @@
             on a like '%'||strip(search)||'%'
       ;
   quit;
+  
+  proc sql noprint;
+    select distinct memname into :cnt_test2 separated by ' '
+    from dictionary.columns
+    where     upcase(libname) ='WORK'
+          and upcase(memname) like 'PERFPARMTEST%'
+          and upcase(memname) like '%'||'_'||strip(upcase("&analyBy"))
+    ;
+  quit;
 
   
