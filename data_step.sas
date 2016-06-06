@@ -175,7 +175,7 @@
   run;
   
  * [06JUN2016]. Define footnote using data step. ;
-   data code;
+   data _null_;
       length code $100;
       retain code;
       set ds_excluded;
@@ -185,7 +185,7 @@
       if first.id then
       do;
         code = catx(" ", 
-                    cats("footnote", put(seq, best.)),
+                    cats("footnote", strip(put(seq, best.))),
                     cats("Animal", "=", " ", put(id, best.)),
                     cats("Interval", "="));
       end;
@@ -199,9 +199,9 @@
       else 
       do;
         code = cats(code, ";");
+        output;
       end;
 
       call execute(code);
-
     run;
 
