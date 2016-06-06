@@ -186,7 +186,7 @@
       do;
         code = catx(" ", 
                     cats("footnote", strip(put(seq, best.))),
-                    cats("Animal", "=", " ", put(id, best.)),
+                    cats("Id", "=", " ", put(id, best.)),
                     cats("Interval", "="));
       end;
 
