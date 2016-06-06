@@ -204,4 +204,18 @@
 
       call execute(code);
     run;
+    
+  * [06JUN2016]. Create sequence starting from "2". ;
+    data work.test (keep= var1 var2 seq2);
+      length var1 var2 seq2 8;
+      retain seq2;
+      set work.test;
+      
+      by var1;
+      if first.var1 then 
+      do;
+        seq+1;
+        seq2 = seq + 1;
+      end;
+    run;
 
