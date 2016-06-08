@@ -218,4 +218,22 @@
         seq2 = seq + 1;
       end;
     run;
+    
+  * [08JUN2016]. Create SAS dataset from scratch. ;
+    data work.test;
+      length parm $20 sex $1 _treatment Adjp 8;
+
+      %do i=1 %to &cnt_sex;
+               
+        %let sex_i = %scan(&grps_sex, &i, %str( )); 
+        parm = symget('label_parameter');
+        
+        sex  ="&sex_i";
+        _treatment = 1; 
+        Adjp       = 1.0000; 
+
+        output;
+        
+      %end;
+    run;
 
