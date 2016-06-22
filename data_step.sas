@@ -236,4 +236,10 @@
         
       %end;
     run;
+    
+    
+ * [22JUN2016]. Display Error/Warning/Note message to the log. ;
+   data _null_;
+     put "ERR" "OR: you're in problem.";
+   run;
 
