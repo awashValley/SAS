@@ -100,4 +100,10 @@
   %let logi =%sysfunc(compress(%sysfunc(catx(%str( ), %, &undesNote2, %))));
   %put >>> logi: &logi; 
   
+* [Thur 23JUN2016]. Incremental macro variable. ;
+  %LET i = 1;
 
+    %DO %UNTIL(&myvar = );
+      /* Do your staff here... */
+      %LET i = %EVAL(&i + 1);
+    %END;
