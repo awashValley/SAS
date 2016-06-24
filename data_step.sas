@@ -237,9 +237,18 @@
       %end;
     run;
     
-    
- * [22JUN2016]. Display Error/Warning/Note message to the log. ;
+* [22JUN2016]. Display Error/Warning/Note message to the log. ;
    data _null_;
      put "ERR" "OR: you're in problem.";
    run;
+   
+* [24JUN2016]. Looping. ;
+  %MACRO step1 ;    
+  %MEND step1;     
+  /*Do the same for step2 through step20*/
+  DATA _NULL_;
+    DO mani = 2 to 20;
+      CALL EXECUTE('%MACRO step'||STRIP(mani)||'; %MEND step'||STRIP(mani)||';');
+    END;
+  RUN;
 
