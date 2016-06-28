@@ -251,4 +251,16 @@
       CALL EXECUTE('%MACRO step'||STRIP(mani)||'; %MEND step'||STRIP(mani)||';');
     END;
   RUN;
+  
+* [28JUN2016]. Assign missing value in DATALINES. ;
+  DATA code;
+    LENGTH dateRaw $9 dateIso $11;
+    INPUT dateRaw $ dateIso $;
+  
+    *dateIso = " ";  /* NOT ALLOWED */
+  
+    DATALINES;
+    10DEC2016 .
+    ;
+  RUN;
 
