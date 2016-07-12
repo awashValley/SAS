@@ -263,4 +263,15 @@
     10DEC2016 .
     ;
   RUN;
+  
+  
+* [TUE 12JUL2016]. Importe Excel file. ;
+* - The xlsx in the LIBNAME statement indicates SAS shouldn't look for regular SAS datasets but for xlsx in this case. ;
+  LIBNAME mylib xlsx "path/to/file.xlsx";
+  
+  DATA work.test;
+     LENGTH ...;
+     INFILE mylib;
+     INPUT ...;
+  RUN;
 
