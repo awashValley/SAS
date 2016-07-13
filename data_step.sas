@@ -274,4 +274,12 @@
      INFILE mylib;
      INPUT ...;
   RUN;
+  
+  
+* [WED 13JUL2016]. Using IN operator. ;
+  DATA test;
+    SET orig;
+    
+    IF UPCASE(table) IN("A" "B" "C" "D") THEN OUTPUT;
+  RUN;
 
