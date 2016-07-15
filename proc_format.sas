@@ -1,5 +1,5 @@
 
-/* [Tue 31MAY2016]. Create and store formats for treatment groups. */
+* [Tue 31MAY2016]. Create and store formats for treatment groups. ;
   proc sql noprint;
     create table fmtTable as
     select distinct treatment 
@@ -19,4 +19,17 @@
   run; 
 
   proc format cntlin=work.fmtTable library=work;
+  run;
+
+
+* [Fri 15JUL2016]. Append asterisk for significant mean values. ;
+  proc format;
+    picture myage
+      low - 13 = '00*'
+      15 - high = '00*';
+  run;
+
+  data work.test;
+    set sashelp.class;
+    format age myage.;
   run;
