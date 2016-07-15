@@ -23,6 +23,7 @@
 
 
 * [Fri 15JUL2016]. Append asterisk for significant mean values. ;
+* Reference: http://support.sas.com/documentation/cdl/en/proc/61895/HTML/default/viewer.htm#a002473467.htm ;
   proc format;
     picture myage
       low - 13 = '00*'
