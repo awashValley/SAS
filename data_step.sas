@@ -283,3 +283,16 @@
     IF UPCASE(table) IN("A" "B" "C" "D") THEN OUTPUT;
   RUN;
 
+
+* [MON 18JUL2016]. Duplicate data. ;
+* Reference: http://stackoverflow.com/questions/10286523/copy-and-pasting-rows-into-a-sas-dataset ;
+  data work.have;
+    a=1;b=2;c=3;
+  run;
+
+  data work.want;
+    set work.have;
+     output;
+
+    if a=1 then output; /* Again */
+  run;
