@@ -34,3 +34,10 @@
     set sashelp.class;
     format age myage.;
   run;
+  
+  
+* [Wed 20JUL2016]. Print the contents of user-defined formats. ;
+  PROC CATALOG CATALOG=work.formats;
+    CONTENTS;
+  RUN;
+  QUIT;
