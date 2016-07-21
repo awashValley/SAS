@@ -57,6 +57,6 @@
   
 * [Thur 21JUL2016]. Update values of the dataset. ;
   proc sql;
-    update compare set unique='34343' where
+    update work.demog set unique='34343' where
     unique='20202';
   quit;
