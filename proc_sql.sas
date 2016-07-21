@@ -55,7 +55,7 @@
   quit;
   
   
-* [Thur 21JUL2016]. Update values of the dataset. ;
+* [Thur 21JUL2016]. Update values in a dataset. ;
   proc sql;
     update work.demog set unique='34343' where
     unique='20202';
