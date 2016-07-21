@@ -53,3 +53,10 @@
     select filename into: first_file
     from work.dirlist (obs=1);
   quit;
+  
+  
+* [Thur 21JUL2016]. Update values of the dataset. ;
+  proc sql;
+    update compare set unique='34343' where
+    unique='20202';
+  quit;
