@@ -74,3 +74,6 @@
   %PUT ###NOTE:                                                                                  .;
   %PUT ###########################################################################################;
 %END;
+
+
+/*Calculate the difference in days and then add 1 if non-negative to align with CDISC day calculation*/
