@@ -60,3 +60,19 @@
     update work.demog set unique='34343' where
     unique='20202';
   quit;
+  
+* [Thur 01SEP2016]. Insert a new row in empty SAS dataset. ;
+  PROC SQL NOPRINT;
+  INSERT INTO outdt.suppae_pre
+  SET 
+    studyid  =" ", 
+    rdomain  =" ",
+    usubjid  =" ",
+    idvar    =" ",
+    idvarval =" ",
+    qnam     ="AEPOSTVC", 
+    qlabel   =" ",
+    qval     =" ",
+    qorig    =" ",
+    qeval    =" ";
+  QUIT;
