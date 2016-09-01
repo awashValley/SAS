@@ -18,7 +18,12 @@
     label = cat("Group ", _n_);
   run; 
 
+  /* To create FORMAT catalog from user-defined SAS dataset. */
   proc format cntlin=work.fmtTable library=work;
+  run;
+  
+  /* To Save FORMAT catalog to SAS dataset. */
+  proc format cntlout=work.save_frmt;
   run;
 
 
