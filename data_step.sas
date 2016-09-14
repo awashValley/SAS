@@ -296,3 +296,10 @@
 
     if a=1 then output; /* Again */
   run;
+  
+* [WED 14SEP2016]. Use of <EOF> command. ;
+  DATA _NULL_;
+    SET work.test END=eof;
+ 
+    IF eof THEN CALL SYMPUTX('nrows',PUT(_N_,8.));              
+  RUN;
