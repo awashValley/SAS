@@ -8,3 +8,9 @@
      %put %str(ER)ROR: Physical file does not exist, &lgname.;
      %goto checkend;
   %end;
+
+  /* To clean work */
+  proc datasets library = work nolist;
+     %if %sysfunc(exist("work._log_out_tmp")) = 0 %then delete _log_out_tmp;;
+     %if %sysfunc(exist("work.&outds")) = 0 %then delete &outds;;
+  quit;
