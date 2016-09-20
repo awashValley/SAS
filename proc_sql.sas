@@ -76,3 +76,12 @@
     qorig    =" ",
     qeval    =" ";
   QUIT;
+
+/* [Tue, 20SEP2016]: Count number of datasets available in a file. */
+LIBNAME rawdat "path..." access=readonly;
+
+PROC SQL NOPRINT;
+  SELECT memname into :ds_list SEPARATED BY ' ' 
+  FROM dictionary.tables 
+  WHERE LIBNAME = "RAWDAT";
+QUIT;
