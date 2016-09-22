@@ -3,4 +3,7 @@
 /* WARNING: The quoted string currently being processed has become more than 262 bytes long.  You might have unbalanced quotation marks. */
 /* Fix by using the ff OPTION */
    OPTIONS NOQUOTELENMAX; 
+   
+/* Suppress multiple lengths */
+   OPTIONS VARLENCHK = NOWARN
 
