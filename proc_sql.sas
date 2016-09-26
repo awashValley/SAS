@@ -85,3 +85,18 @@ PROC SQL NOPRINT;
   FROM dictionary.tables 
   WHERE LIBNAME = "RAWDAT";
 QUIT;
+
+/* [Mon, 26SEP2016]. Get column names for your datset.  */
+
+  /* Check QNAM and USUBJID */
+  LIBNAME inpt2 "&file_path";
+
+  proc sql noprint;
+    select name into :col_names separated by ' '
+    from dictionary.columns
+    where libname = "INPT2" and 
+          memname = "MYDATA"
+    ;
+  quit;
+
+
