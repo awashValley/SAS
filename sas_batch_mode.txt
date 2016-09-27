@@ -1,1 +1,6 @@
 
+## [Tue, 27SEP2016]. Running SAS in batch mode.; 
+   1. Open Terminal (CMD)
+   2. Go to Environmental setting and include path where SAS.exe located (e.g., c:\program files\SAS\SASFoundation\9.2)
+   3. Type the code shown below in the terminal:
+      > sas.exe -batch -log c:\mylog.log -sysin c:\mypgm.sas -print c:\mylst.lst [optional: -sysparm My Passed Paramameter] 
