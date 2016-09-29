@@ -303,3 +303,19 @@
  
     IF eof THEN CALL SYMPUTX('nrows',PUT(_N_,8.));              
   RUN;
+  
+ * [Thur, 29SEP2016]. Attribute statement used for creating an empty SAS dataset. ;
+   DATA work.mapped_co;
+     ATTRIB studyid  LENGTH=$200 label='Study Identifier' 
+            domain   LENGTH=$200 label='Domain Abbreviation' 
+            rdomain  LENGTH=$200 label='Related Domain Abbreviation' 
+            usubjid  LENGTH=$200 label='Unique Subject Identifier' 
+            coseq    LENGTH=8    label='Sequence Number' 
+            idvar    LENGTH=$200 label='Identifying Variable' 
+            idvarval LENGTH=$200 label='Identifying Variable Value'          
+            coval1   LENGTH=$200 label='Comment 1'          
+            coval2   LENGTH=$200 label='Comment 2'
+            ;
+  
+     CALL MISSING(OF _ALL_);
+   RUN;
