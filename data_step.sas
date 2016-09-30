@@ -319,3 +319,13 @@
   
      CALL MISSING(OF _ALL_);
    RUN;
+
+/* [Fri, 30SEP2016]. How to Check, if the variable exists in the SAS dataset or not? */
+/* SOURCE:           http://studysas.blogspot.co.uk/2009/04/how-to-check-if-variable-exists-in-sas.html */
+  DATA _null_;
+    dset = OPEN('sashelp.class');
+    CALL SYMPUT('chk_var', varnum(dset, 'age'));
+  RUN; 
+  
+  %PUT >>> chk_var: &chk_var;
+  
