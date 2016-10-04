@@ -99,4 +99,18 @@ QUIT;
     ;
   quit;
 
+/* [Tue, 04OCT2016]. Separate values of macro variable by quotation. */
+   PROC SQL NOPRINT;
+     SELECT usubjid into :lst_usubjid SEPARATED BY '" "'
+     FROM work.test1;
+   RUN;
+
+   /* Keep only those selected subjects in TEST2 dataset. */
+   PROC SQL NOPRINT;
+     CREATE TABLE work.test2 AS  
+     SELECT *
+     FROM work.test1
+     WHERE usubjid IN("&lst_usubjid.")   
+     ;
+  QUIT;
 
