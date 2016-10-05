@@ -329,3 +329,9 @@
   
   %PUT >>> chk_var: &chk_var;
   
+/* [Wed, 05OCT2016]. Obtain the number of records in dataset.  */
+   DATA _NULL_;
+     SET sashelp.class END=LAST;
+  
+     IF LAST THEN CALL SYMPUT('num_obs', _N_);
+   RUN;
