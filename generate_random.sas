@@ -34,3 +34,12 @@
 
 %MEND  gen_rand;
      
+/* Usage: */
+  * Get number of subjects in DM. ;
+DATA _NULL_;
+  SET sashelp.class END=LAST;
+  
+  IF LAST THEN CALL SYMPUT("nn_class", _N_);
+RUN;
+
+%gen_rand(NRecords=&nn_class, seed=123, NObs=5, out_rand=lst_rand);
