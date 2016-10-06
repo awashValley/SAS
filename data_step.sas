@@ -219,6 +219,16 @@
       end;
     run;
     
+  * [06OCT2016]. Another sequence example. ;
+    DATA work.test(DROP = tempseq);
+       SET work.test;
+       BY sort_vars;
+      
+       tempseq + 1;
+       IF FIRST.usubjid THEN tempseq = 1;
+       aeseq = tempseq;
+     RUN;
+    
   * [08JUN2016]. Create SAS dataset from scratch. ;
     data work.test;
       length parm $20 sex $1 _treatment Adjp 8;
