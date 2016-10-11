@@ -114,3 +114,10 @@ QUIT;
      ;
   QUIT;
 
+/* Count number of raw/study datasets available in RAWDATA folder. */
+  LIBNAME rawdat "&root_path./VALIDATION/Test Data/Rawdata";
+  proc sql noprint; 
+    select count(*) into :cnt_ds 
+    from dictionary.tables 
+    where libname=%upcase("rawdat"); 
+  quit;  
