@@ -1,4 +1,4 @@
-/* [Wed, 19OCT2016]. %NRSTR  */
+/* [Wed, 19OCT2016]. %NRSTR function. */
 %MACRO prog1(chk_prog =,
              chk_lib  =,
              chk_dset =,
