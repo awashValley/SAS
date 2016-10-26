@@ -121,3 +121,11 @@ QUIT;
     from dictionary.tables 
     where libname=%upcase("rawdat"); 
   quit;  
+  
+ /* [Wed, 26OCT2016]. Number of variables in SAS dataset. */
+ proc sql noprint;
+  select nvar into :num_vars 
+  from dictionary.tables
+  where libname='SASHELP' and 
+        memname='CLASS';
+quit;
