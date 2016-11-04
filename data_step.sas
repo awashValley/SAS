@@ -345,3 +345,12 @@
   
      IF LAST THEN CALL SYMPUT('num_obs', _N_);
    RUN;
+
+/* [Fri, 04NOV2016]. Add to all records, except for the last one */
+  DATA &attr_dsin.;
+    LENGTH inxls_vars $200;
+    SET &attr_dsin. END = LAST ;
+    
+    inxls_vars = strip(name) || "   " || "*" || "   " || strip(format) || strip(length); 
+    IF NOT LAST THEN inxls_vars = STRIP(inxls_vars) || "   " || "@";
+  RUN;
