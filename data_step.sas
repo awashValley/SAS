@@ -354,3 +354,11 @@
     inxls_vars = strip(name) || "   " || "*" || "   " || strip(format) || strip(length); 
     IF NOT LAST THEN inxls_vars = STRIP(inxls_vars) || "   " || "@";
   RUN;
+  
+/* [Sun, 20161106]. Convert date to string */
+DATA work.test (DROP = _var3_dt);
+  LENGTH var1 var2 8 var3_dt $20;
+  SET work.test (RENAME = (var3_dt = _var3_dt) );
+  
+  var3_dt = PUT(_var3_dt, datetime.);
+RUN;
