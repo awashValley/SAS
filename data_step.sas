@@ -362,3 +362,19 @@ DATA work.test (DROP = _var3_dt);
   
   var3_dt = PUT(_var3_dt, datetime.);
 RUN;
+
+/* [20161107]. SAS convert string into datetime */
+/* SOURCE: http://stackoverflow.com/questions/15544981/sas-convert-string-into-datetime */
+data have ;
+  datestring = "01-Oct-2012 12:23:43.324" ;
+run ;
+
+data want ;
+  set have ;
+
+  dt = input(scan(datestring,1,' '),??date11.) ;
+  tm = input(scan(datestring,2,' '),??time14.) ;
+  dttm = dhms(dt,0,0,tm) ;
+
+  format dt date9. tm time14.3 dttm datetime24.3 ;
+run ;
