@@ -378,3 +378,17 @@ data want ;
 
   format dt date9. tm time14.3 dttm datetime24.3 ;
 run ;
+
+/* Get subjid who has visited twice (10, 20) */
+proc sort data=inpt_ae;
+  by subjid;
+run;
+
+DATA target.inpt_ae;
+  SET target.inpt_ae (WHERE = (visitnum IN(10 20)) );
+  
+  BY subjid;
+  
+  IF (first.subjid AND NOT last.subjid) OR
+     (not first.subjid AND last.subjid);
+RUN;
