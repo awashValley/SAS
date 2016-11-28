@@ -5,7 +5,7 @@
 filename logout "&olog.\&progname..log";
 filename lstout "&olog.\&progname..lst";
 
-proc printto log=logout print=lstout;
+proc printto log=logout print=lstout new;
 run;
 
 /*proc printto log="&path.\mylog.log" new;
