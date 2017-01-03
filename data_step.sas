@@ -392,3 +392,6 @@ DATA target.inpt_ae;
   IF (first.subjid AND NOT last.subjid) OR
      (not first.subjid AND last.subjid);
 RUN;
+
+/* Reading Raw Data with the INPUT Statement */
+   > http://support.sas.com/documentation/cdl/en/lrcon/62955/HTML/default/viewer.htm#a003209907.htm
