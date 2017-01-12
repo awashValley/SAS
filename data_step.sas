@@ -395,3 +395,13 @@ RUN;
 
 /* Reading Raw Data with the INPUT Statement */
    > http://support.sas.com/documentation/cdl/en/lrcon/62955/HTML/default/viewer.htm#a003209907.htm
+
+/* [12-Jan-2017]. The power of PUT statement */
+DATA _null_;
+  SET work.specs_parameters(WHERE=(listing_name = "&listing_name." AND
+                                  (name="&listing_name." OR name = "&output_sheet." OR missing(name)) AND
+                                   type = 'LISTING'));
+  IF _N_ = 1 THEN PUT '### Specs PARAMETERS:';
+  PUT 2*'#' @ 4 parameter @20 value;
+  call symputx(parameter,value);
+RUN;
