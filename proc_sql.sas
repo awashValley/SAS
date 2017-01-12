@@ -129,3 +129,14 @@ QUIT;
   where libname='SASHELP' and 
         memname='CLASS';
 quit;
+
+/* [12-Jan-2017]. Usage of INTO statement */
+   PROC SQL NOPRINT;
+      SELECT distinct(output_sheet),
+             count(distinct(output_sheet))
+      INTO   :output_sheets separated by ' ',
+             :n_output_sheets
+      FROM work.specs_input2
+      WHERE listing_name = "&listing_name."
+      ;
+    QUIT; 
