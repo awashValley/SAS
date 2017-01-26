@@ -140,3 +140,15 @@ quit;
       WHERE listing_name = "&listing_name."
       ;
     QUIT; 
+
+/* [26-Jan-2017]. Selecting All Observations When Any Observation Is of Interest */
+/*                 SOURCE: http://support.sas.com/resources/papers/proceedings12/252-2012.pdf */
+PROC SQL NOPRINT;
+  CREATE TABLE work.ABD_4 AS
+  SELECT *
+  FROM work.ABD_3
+  WHERE subjid IN (SELECT DISTINCT subjid 
+                   FROM work.ABD_3 
+                   WHERE UPCASE(src)="SAE" )
+  ;
+QUIT;
