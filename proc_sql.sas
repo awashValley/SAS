@@ -153,6 +153,18 @@ PROC SQL NOPRINT;
   ;
 QUIT;
 
+/* [07-Feb-2017]. Powerful application of sub-query. */
+/* - Get only interesting code lists.                */
+PROC SQL NOPRINT;
+  CREATE TABLE work.codelist AS
+  SELECT *
+  FROM lib_data.codelist  
+  WHERE code IN(SELECT DISTINCT eventtyp
+                FROM work.lab
+               ) 
+  ;
+QUIT;
+
 /* [07-Feb-2017]. Number of records per group (e.g., subjid). */
 PROC SQL NOPRINT;
   CREATE TABLE count_labsheet AS
