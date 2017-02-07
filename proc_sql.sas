@@ -152,3 +152,13 @@ PROC SQL NOPRINT;
                    WHERE UPCASE(src)="SAE" )
   ;
 QUIT;
+
+/* [07-Feb-2017]. Number of records per group (e.g., subjid). */
+PROC SQL NOPRINT;
+  CREATE TABLE count_labsheet AS
+  SELECT subjid, count(subjid) AS count
+  FROM work.labsheet_Orig
+  GROUP BY subjid
+  ORDER BY subjid;
+  ;
+QUIT;
