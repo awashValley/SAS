@@ -1,0 +1,7 @@
+
+/* [08-Feb-2017]. CAT / CATX / CATT functions. */
+/* SOURCE: http://technico.qnownow.com/concatenate-strings-the-smarter-way-with-cat-catx-catt-functions/ */
+CAT() – Concatenates character strings without removing leading or trailing blanks
+CATX() – Concatenates character strings, removes leading and trailing blanks, and inserts separators
+CATT() – Concatenates character strings and removes trailing blanks
+CATS() – Concatenates character strings and removes leading and trailing blanks, no seperators
