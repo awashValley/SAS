@@ -405,3 +405,21 @@ DATA _null_;
   PUT 2*'#' @ 4 parameter @20 value;
   call symputx(parameter,value);
 RUN;
+
+/* [15-Feb-2017]. Compare two columns of the variable in two same dataset, and identify the changes. */
+/* - Enhancement: check if this can be done using PROC SQL... */
+PROC SORT DATA=target.crf_page_all_old OUT=crf_page_all_old;
+  BY visitnum panelcd eventtyp;
+RUN;
+
+PROC SORT DATA=target.crf_page_all OUT=crf_page_all;
+  BY visitnum panelcd eventtyp;
+RUN;
+
+DATA work.qwe2 (KEEP = visitnum panelcd eventtyp);
+  /*LENGTH flg_eventtyp $10;*/  /* Not sure how to calculate the flag... */
+  MERGE crf_page_all_old (IN=a) crf_page_all (IN=b);
+  
+  BY visitnum panelcd eventtyp;   /* unique records */
+  IF a+b < 2 THEN OUTPUT;
+RUN;
