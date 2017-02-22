@@ -423,3 +423,23 @@ DATA work.qwe2 (KEEP = visitnum panelcd eventtyp);
   BY visitnum panelcd eventtyp;   /* unique records */
   IF a+b < 2 THEN OUTPUT;
 RUN;
+
+/* [22-Feb-2017]. Retain baseline value. */
+proc sort data=work.bw;
+  by animal;
+run;
+
+data work.bw;
+  set work.bw;
+  by animal;
+  
+  if first.animal then base=resp;
+  
+  retain base;
+run;
+
+
+
+
+
+
