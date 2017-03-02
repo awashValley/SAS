@@ -439,6 +439,21 @@ data work.bw;
 run;
 
 
+/* [02-Mar-2017]. Concatenate multiple rows in dataset per group. */
+DATA work.all_vars_3;
+  LENGTH keep_vars $200;
+  RETAIN keep_vars;
+  
+  SET work.all_vars_2;
+  
+  BY dataset;
+  
+  IF first.dataset THEN keep_vars = CATS(variable);
+  ELSE keep_vars = CATX(' ', keep_vars, variable);
+  
+  IF last.dataset THEN OUTPUT;
+RUN;
+
 
 
 
