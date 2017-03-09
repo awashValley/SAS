@@ -454,7 +454,18 @@ DATA work.all_vars_3;
   IF last.dataset THEN OUTPUT;
 RUN;
 
-
+/* [Thur, 09-Mar-2017]. Calculate age from date difference. */
+DATA work.demog;
+  SET work.demog;
+  
+  /* Calculate Age. */
+  IF LENGTH(rficdtc) >= 10 AND LENGTH(brthdtc) >=10 THEN age = FLOOR((INPUT(SUBSTR(rficdtc,1,10), is8601da.) - INPUT(SUBSTR(brthdtc,1,10), is8601da.))/365.25);
+  ELSE age = .;
+  
+  /* Calculate Ageu. */
+  IF NOT MISSING(age) THEN ageu = "YEARS";
+  ELSE ageu = " ";
+RUN;
 
 
 
