@@ -467,5 +467,16 @@ DATA work.demog;
   ELSE ageu = " ";
 RUN;
 
+/* [Mon, 13-Mar-2017]. Compare SAS dates. */
+DATA work.test;
+  SET work.test;
+  IF NOT MISSING(dthdtc) AND NOT MISSING(rfendtc) AND 
+         INPUT(dthdtc, yymmdd10.) < INPUT(rfendtc, yymmdd10.) THEN
+  DO;
+    rfendtc = dthdtc;
+  END; 
+RUN;
+
+
 
 
