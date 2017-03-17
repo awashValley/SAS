@@ -485,4 +485,13 @@ DATA work.test;
   eclnkgrp = CATS("V", STRIP(PUT(visitnum, BEST.)), "-", STRIP(ecspid));
 RUN;
 
+/* [Fri, 17-Mar-2017]. Remove leading zeros. */
+/* - Suppose variable ae_nb could have leading zeros and it's string. */
+DATA work.test;
+  SET work.source;
+  
+  xyz = INPUT(ae_nb, BEST.);
+RUN;
+
+
 
