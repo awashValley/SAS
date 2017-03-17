@@ -477,6 +477,12 @@ DATA work.test;
   END; 
 RUN;
 
-
+/* [Fri, 17-Mar-2017]. convert numeric to character. */
+/* - Variable visitnum is numeric. */
+DATA work.test;
+  SET work.source;
+  
+  eclnkgrp = CATS("V", STRIP(PUT(visitnum, BEST.)), "-", STRIP(ecspid));
+RUN;
 
 
