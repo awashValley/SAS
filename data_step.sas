@@ -493,5 +493,13 @@ DATA work.test;
   xyz = INPUT(ae_nb, BEST.);
 RUN;
 
-
+/* [Thur, 30-Mar-2017]. Calculate Age in YEARS or in MONTHS.  */
+DATA test;
+  *IF LENGTH(rficdtc) >= 10 AND LENGTH(brthdtc) >=10 THEN age = FLOOR((INPUT(SUBSTR(rficdtc,1,10), is8601da.) - INPUT(SUBSTR(brthdtc,1,10), is8601da.))/365.25);
+  IF LENGTH(rficdtc) >= 10 AND LENGTH(brthdtc) >=10 THEN age = FLOOR((INPUT(SUBSTR(rficdtc,1,10), is8601da.) - INPUT(SUBSTR(brthdtc,1,10), is8601da.))/365.25*12);
+  ELSE age = .;
+  *IF NOT(MISSING(age)) THEN ageu = 'YEARS';
+  IF NOT(MISSING(age)) THEN ageu = 'MONTHS';
+  ELSE ageu = ' ' ; 
+RUN;
 
