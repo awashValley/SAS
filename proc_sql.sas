@@ -174,3 +174,13 @@ PROC SQL NOPRINT;
   ORDER BY subjid;
   ;
 QUIT;
+
+/* [06-Apr-2017]. Add Suffix to all variables in dataset. */
+proc sql;
+select cat(name, ' = ', cats(name, '_3mo' )) into :renstr separated by ' ' from
+dictionary.columns where libname = 'WORK' and memname='FMIN';
+quit;
+
+data new;
+set fmin (rename = (&renstr));
+run;
