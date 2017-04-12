@@ -15,7 +15,7 @@
 
 data test;
   text = "lib1.xyz=lib2.abc blah blahh lib3.fgh=lib4.ijk"; 
-  ptnID = prxparse('/(\w+).(\w+)/');
+  ptnID = prxparse('/(\w+)\.(\w+)/');     /* since dot is a special character, you need to escape it. */
   
   IF PRXMATCH(ptnID, text) THEN 
   DO;
