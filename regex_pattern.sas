@@ -21,12 +21,13 @@ data test;
   DO;
     call prxposn(ptnID, 1, position, length);
     first_wrd = substr(text, position, length);
+    output;
     
     call prxposn(ptnID, 2, position, length);
     second_wrd = substr(text, position, length);
+    output;
   END;
   
-  output;
 run;
 
 data _null_;
