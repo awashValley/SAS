@@ -507,3 +507,44 @@ DATA test;
   ELSE ageu = ' ' ; 
 RUN;
 
+/****************************************************
+** Derive age category (age_catX, where X=1,2,3).  **
+** Refer the screenshot called <age_cat.png>       **
+*****************************************************/
+DATA work.age_cat (DROP = pid);
+  LENGTH domain studyid usubjid agecat1 agecat2 agecat3 $ 200;
+  SET rawdata.age_cat (KEEP = pid activity age_cat);
+ 
+  domain = STRIP(SYMGET("domain")); 
+  studyid = STRIP(SYMGET("studyNr"));
+  usubjid = STRIP(studyid)||'-'||STRIP(PUT(pid,z6.));
+  
+  IF activity=20 THEN DO;         /* Age category at Time of First Injection. */
+    IF      STRIP(age_cat)="1" THEN agecat1 = "< 5 MONTHS";
+    ELSE IF STRIP(age_cat)="2" THEN agecat1 = "> = 5 MONTHS";
+  END; 
+  ELSE IF activity=40 THEN DO;    /* Age category at Time of Second Injection. */
+    IF      STRIP(age_cat)="3" THEN agecat2 = "< 5 MONTHS";
+    ELSE IF STRIP(age_cat)="4" THEN agecat2 = "> = 5 MONTHS";
+  END; 
+  ELSE IF activity=60 THEN DO;     /* Age category at Time of Third Injection. */
+    IF      STRIP(age_cat)="5" THEN agecat3 = "< 5 MONTHS";
+    ELSE IF STRIP(age_cat)="6" THEN agecat3 = "> = 5 MONTHS";
+  END; 
+RUN;
+
+/* From long-format to wide-format. */
+PROC SORT DATA=work.age_cat; BY usubjid activity; RUN;
+
+DATA work.age_cat2 (DROP = activity);
+  MERGE work.age_cat (KEEP  = domain studyid usubjid activity agecat1
+                      WHERE = (activity=20))
+        work.age_cat (KEEP  = domain studyid usubjid activity agecat2
+                      WHERE = (activity=40))
+        work.age_cat (KEEP  = domain studyid usubjid activity agecat3
+                      WHERE = (activity=60));
+                      
+  BY usubjid;
+RUN;
+
+
