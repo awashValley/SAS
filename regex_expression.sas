@@ -46,3 +46,13 @@ data _null_;
       put text=;
    end;
 run;
+
+/* [Wed, 26-Apr-2017]. Find a string using Datastep. */
+DATA work.subset (DROP = pid);
+  LENGTH subjid subset $ 200;
+  SET rawdata.pid_schd (KEEP = pid sch_desc);
+  
+  subjid = PUT(pid,z6.); 
+  
+  subset = SUBSTR(sch_desc, FIND(sch_desc, "PART "));     /* The value of sch_desc is something like 'Workbook 1 (Schedule 0,1,6) PART B' and 'Workbook 3 (Schedule 0,6) PART A'. */
+RUN;
