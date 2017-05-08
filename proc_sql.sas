@@ -184,3 +184,32 @@ quit;
 data new;
 set fmin (rename = (&renstr));
 run;
+
+/* [08-May-2017]. Flag subjects with multiple records. This is used for a study where subjects had a booster trt at activity=90. */
+/* To see the structure of the source dataset work.rndalloc_orig, check this screenshot "flag subjects with multiple records_booster.png" in gitHab. */
+DATA work.rndalloc_orig;
+  SET rawdata.rndalloc (KEEP = pid activity rnd_id);
+RUN;
+
+/* ASSUMPTION: The booster teatment was given at Activity=90. */
+PROC SQL NOPRINT;
+  CREATE TABLE work.rndalloc AS 
+  SELECT *, COUNT(*) AS count
+  FROM work.rndalloc_orig
+  GROUP BY pid;
+QUIT;
+
+PROC SORT DATA=work.rndalloc; BY pid; RUN;
+
+DATA work.rndalloc;
+  LENGTH flg_booster $ 2;
+  SET work.rndalloc;
+  BY pid;
+  
+  IF count = 2 THEN flg_booster = 'Y';
+RUN;
+  
+DATA work.rndalloc;
+  SET work.rndalloc (WHERE = (activity NE 90));    /* Remove a record at visit=90 since we're interested with the other rnd_id. */
+RUN;
+
