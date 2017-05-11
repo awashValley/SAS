@@ -56,3 +56,12 @@ DATA work.subset (DROP = pid);
   
   subset = SUBSTR(sch_desc, FIND(sch_desc, "PART "));     /* The value of sch_desc is something like 'Workbook 1 (Schedule 0,1,6) PART B' and 'Workbook 3 (Schedule 0,6) PART A'. */
 RUN;
+
+/* [Thur, 20170511]. Use FIND function to find patterns. */
+DATA work.test;
+  SET work.source;
+  
+  IF      FIND(UPCASE(STRIP(tradname)), "VARIVAX") THEN ecroute = "SC";
+  ELSE IF FIND(UPCASE(STRIP(tradname)), "PREVNAR") THEN ecroute = "IM";
+  ELSE IF FIND(UPCASE(STRIP(tradname)), "HAVRIX")  THEN ecroute = "IM";
+RUN;
