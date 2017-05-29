@@ -213,3 +213,11 @@ DATA work.rndalloc;
   SET work.rndalloc (WHERE = (activity NE 90));    /* Remove a record at visit=90 since we're interested with the other rnd_id. */
 RUN;
 
+/* [Mon, 29-May-2017]. Change variable length. */
+PROC SQL NOPRINT;
+  CREATE TABLE work.rando1 AS
+  SELECT A.subjid, B.grp_let AS armcd FORMAT $200. LENGTH 200
+  FROM work.rnd_ctrl A LEFT JOIN work._rando B
+  ON A.rnd_itt = B.rnd_id;
+QUIT;
+
