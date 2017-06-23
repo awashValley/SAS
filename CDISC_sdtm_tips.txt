@@ -1,3 +1,7 @@
 
 /* [01-jun-2017].  */
-SUPPEC is only generated if there are vaccinatinos not given (it contains the reasons of why it was not given)
+- SUPPEC is only generated if there are vaccinatinos not given (it contains the reasons of why it was not given)
+
+/* [23-jun-2017]. */
+- suppec is generated when there are vaccines not given.
+- relrec_ec is generated when there are links between EC and e.g. AE (so when a vaccine is not given because of an AE)
