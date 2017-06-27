@@ -221,3 +221,46 @@ PROC SQL NOPRINT;
   ON A.rnd_itt = B.rnd_id;
 QUIT;
 
+
+/* [27-jun-2017]. Intresting computation. */
+proc sql;
+   *overview source data;
+   create table _min_req_test as
+      select samptype
+            ,lab_test
+            ,stimul
+            ,testdesc
+            ,istestcd
+            ,istest
+            /*,isorresu*/
+            ,count(*) as src1_count
+       from labo_res_51_metadata
+      group by  samptype,lab_test,stimul,testdesc,istestcd,istest,isorresu;
+      
+  *collect BDLS SDTM data;
+  create table _is as
+     select  istestcd
+            ,istest
+            /*,isorresu */
+            ,count(*) as src2_count
+       from insdtm.is (where=(istestcd ne "ISALL"))
+       group by istestcd, istest/*, isorresu*/;
+       
+  * compare src1 mapping to DSTM.IS content;
+  * - missing test mapping;
+  * - differences in records by ISTESTCD;
+   create table __min_req_test_2 as
+      select a.*
+            ,b.istestcd as src2_istestcd
+            ,b.istest   as src2_istest
+            /*,b.isorresu as bdls_isorresu*/
+            ,b.src2_count
+            ,case when sum(src1_count,-src2_count)>0 then "records not equal"||": "||strip(put(sum(src1_count,-src2_count),best.))
+              else "" end as rec_count
+            ,case when a.istestcd ne b.istestcd then "Mapping issue"
+              else "Mapping OK" end as mapping
+       from _min_req_test as a left join _is as b
+         on a.istestcd=b.istestcd;
+quit;
+
+
