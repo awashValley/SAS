@@ -237,7 +237,7 @@ proc sql;
        from labo_res_51_metadata
       group by  samptype,lab_test,stimul,testdesc,istestcd,istest,isorresu;
       
-  *collect BDLS SDTM data;
+  *collect src2 SDTM data;
   create table _is as
      select  istestcd
             ,istest
