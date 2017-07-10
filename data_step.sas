@@ -548,3 +548,16 @@ DATA work.age_cat2 (DROP = activity);
 RUN;
 
 
+/* [10-jul-2017]. Assign labels to dataset */
+** Get label from REFTABLES;
+%LET dslabel = NONE;
+ 
+PROC SQL NOPRINT;
+  SELECT label into :dslabel
+  FROM stndrd.reftables (WHERE=(UPCASE(table)="%UPCASE(&domain)"));
+QUIT;
+  
+DATA sdtmout.val_&domain. (LABEL="%SYSFUNC(STRIP(&dslabel))");
+   set work.&domain.;
+RUN; 
+
