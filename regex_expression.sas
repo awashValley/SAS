@@ -65,3 +65,43 @@ DATA work.test;
   ELSE IF FIND(UPCASE(STRIP(tradname)), "PREVNAR") THEN ecroute = "IM";
   ELSE IF FIND(UPCASE(STRIP(tradname)), "HAVRIX")  THEN ecroute = "IM";
 RUN;
+
+/* [01-Aug-2017]. Drop/Keep variables using pattern matching (e.g., LIKE, colon wildcard).  */
+%macro drop_vars(dsin = );
+/* GENERAL: Get list of unnessary variables in source dataset CM. */
+   
+   %global droplist;
+   %let droplist = ;
+   
+   proc contents data=&dsin. out=work.contents(keep=name) noprint ; run;
+   
+   proc sql noprint ;
+      select name into :droplist separated by ' '
+      from work.contents
+      where upcase(name) like '%^_FRN' escape '^' OR 
+            upcase(name) like '%^_SRN' escape '^' OR 
+            upcase(name) like '%^_IRN' escape '^' OR 
+            upcase(name) like '%^_CRN' escape '^' OR 
+            upcase(name) like '%^_EDT' escape '^' OR 
+            upcase(name) like '%^_CTX' escape '^' OR 
+            upcase(name) like '%^_ND'  escape '^'     
+      ;
+   quit;
+   
+   %put droplist: &droplist;
+   
+%mend drop_vars;
+
+
+/******************
+** pp 254/255    **
+*******************/
+
+/* Read source dataset. */
+data cm;
+  set rawdata.cm (keep=CMINDCPRSP CMINDCGEN CMINDCLOC CMINDCOTH 
+                       /*CMMHNO: CMAENO:*/
+                       CMMHNO1-CMMHNO6 CMAENO1-CMAENO6);
+run;
+
+%drop_vars(dsin = work.cm);
