@@ -561,3 +561,13 @@ DATA sdtmout.val_&domain. (LABEL="%SYSFUNC(STRIP(&dslabel))");
    set work.&domain.;
 RUN; 
 
+/* Check if space exist in a variable. */
+data test;
+  length var1 $ 200;
+  set rwdat2.test (keep = subjid var1 
+                   rename = (var1 = _var1));
+                       
+  var1 = quote(PUT(_var1, BEST.)); 
+run;
+
+
