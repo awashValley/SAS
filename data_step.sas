@@ -570,4 +570,19 @@ data test;
   var1 = quote(PUT(_var1, BEST.)); 
 run;
 
+/* [Thur, 07-Sep-2017]. Get latest folder. */
+FILENAME stdmac "<path>";
+
+%LET latest_date = ;
+data _NULL_;
+  did = DOPEN('stdmac');
+  rowcount = DNUM(did);
+  itemname = DREAD(did,rowcount);          /* DREAD gets the latest folder. */
+  call symputx('latest_date', itemname);
+run;
+
+FILENAME stdmac "<path>/&latest_date.";
+
+
+
 
