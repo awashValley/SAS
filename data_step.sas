@@ -583,6 +583,19 @@ run;
 
 FILENAME stdmac "<path>/&latest_date.";
 
+/* [Thur, 07-Sep-2017]. Extract string from long text. */
+%LET run_folder  = <path>/<projid>/<studyid>/<other>/<end>;
 
+DATA _qwe;
+  LENGTH run_folder word $ 200;
+  DROP run_folder;
+  
+  run_folder = STRIP(SYMGET('run_folder'));
+  DO UNTIL(word = '<end>');
+    count + 1;
+    word = SCAN(run_folder, count, '/');
+    OUTPUT;
+  END;
+RUN;
 
 
