@@ -32,3 +32,16 @@ run;
     delimiter = '09'x; 
     getnames = yes;
   run;
+
+/* [Fri, 22-Sep-2017]. Import TXT file format. */
+FILENAME src  "path" TERMSTR=CRLF LRECL=3276;    /* CRLF for carriage return */
+FILENAME src  "path" TERMSTR=LF LRECL=3276;
+
+DATA  WORK._macvar;
+	%LET _EFIERR_ = 0;
+	INFILE src  DELIMITER= &dlm  MISSOVER DSD lrecl=32767 OBS=1;
+	INFORMAT var1-var25  $200. ;
+	FORMAT var1-var25 $200. ;
+	INPUT var1-var25;
+	IF _ERROR_ then call symputx('_EFIERR_',1); 
+RUN;
