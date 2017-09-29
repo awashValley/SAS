@@ -599,3 +599,30 @@ DATA _qwe;
 RUN;
 
 
+/* [Fri, 29-Sep-2017]. Resolve macro variable inside CATX function. */
+/*                     - SYMGET function plays the major role here. */
+PROC SQL NOPRINT;
+  /*CREATE TABLE work.usubjid_dm2 AS*/
+  SELECT DISTINCT QUOTE(TRIM(A.usubjid)) INTO :lst_usubjid SEPARATED BY ', '
+  FROM       work.usubjid_dm  A
+  INNER JOIN work.usubjid_be  B ON A.usubjid  = B.usubjid2 
+  INNER JOIN work.usubjid_pf_ C ON B.usubjid2 = C.usubjid3 
+  INNER JOIN work.usubjid_pg_ D ON C.usubjid3 = D.usubjid4;
+QUIT;
+
+DATA _NULL_;
+  LENGTH code $ 200;
+  SET work.metadata_sdtmin;
+  
+  t = SYMGET('lst_usubjid');
+
+  code = CATX(' ', 'PROC SQL NOPRINT; ',
+                   'CREATE TABLE', CATS('work.', dataset), 'AS',
+                   'SELECT *', 
+                   'FROM ', CATS('sdtmin.', dataset), 
+                   'WHERE usubjid IN(',t , ');',
+                   'QUIT;'); 
+                   
+  CALL EXECUTE(code);
+RUN;
+
