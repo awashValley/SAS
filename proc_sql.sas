@@ -264,3 +264,17 @@ proc sql;
 quit;
 
 
+/* [29-Sep-2017]. INTO separated by quotation and comma. */
+/*                - The QUOTE function plays the major role here. */
+PROC SQL NOPRINT;
+  /*CREATE TABLE work.usubjid_dm2 AS*/
+  SELECT DISTINCT QUOTE(TRIM(A.usubjid)) INTO :lst_usubjid SEPARATED BY ', '
+  FROM       work.usubjid_dm  A
+  INNER JOIN work.usubjid_be  B ON A.usubjid  = B.usubjid2 
+  INNER JOIN work.usubjid_pf_ C ON B.usubjid2 = C.usubjid3 
+  INNER JOIN work.usubjid_pg_ D ON C.usubjid3 = D.usubjid4;
+QUIT;
+
+
+
+
