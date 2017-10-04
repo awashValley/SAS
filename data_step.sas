@@ -626,3 +626,13 @@ DATA _NULL_;
   CALL EXECUTE(code);
 RUN;
 
+/* [Wed, 04-Oct-2017]. How to select the last 2 observations by group? */
+/* SOURCE: https://stackoverflow.com/questions/21801576/how-to-select-the-last-2-observations-by-group */
+DATA work.is;
+  SET target.is;
+  count + 1;
+  
+  BY usubjid isseq;
+  IF FIRST.usubjid THEN count=1;
+  IF count <= 4 THEN OUTPUT;
+RUN;
