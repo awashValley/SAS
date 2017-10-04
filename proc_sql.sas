@@ -275,6 +275,18 @@ PROC SQL NOPRINT;
   INNER JOIN work.usubjid_pg_ D ON C.usubjid3 = D.usubjid4;
 QUIT;
 
+/* [Wed, 04-Oct-2017]. Multiple INTO statement. */
+%LET lst_usubjid = ;
+%LET cnt_usubjid = ;
+
+PROC SQL NOPRINT;
+  SELECT DISTINCT QUOTE(TRIM(B.usubjid2)), COUNT(DISTINCT B.usubjid2) 
+         INTO :lst_usubjid SEPARATED BY ', ', 
+              :cnt_usubjid
+  FROM       work.usubjid_be     A
+  INNER JOIN work.usubjid_dm     B ON A.usubjid1 = B.usubjid2;
+QUIT;
+
 
 
 
