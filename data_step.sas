@@ -591,7 +591,7 @@ DATA _qwe;
   DROP run_folder;
   
   run_folder = STRIP(SYMGET('run_folder'));
-  DO UNTIL(word = '<end>');
+  DO UNTIL(word = '<end>' OR count = 100);           /* DO UNTIL is a killer, so use specify stopping rule (e.g., COUNT=100). */
     count + 1;
     word = SCAN(run_folder, count, '/');
     OUTPUT;
