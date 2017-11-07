@@ -636,3 +636,24 @@ DATA work.is;
   IF FIRST.usubjid THEN count=1;
   IF count <= 4 THEN OUTPUT;
 RUN;
+
+/* [Tue, 07-Nov-2017]. Concatenate string values. */
+PROC sort DATA=work.cm_medic;
+  BY usubjid cmspid;
+RUN;
+
+DATA work.cm_medic2;
+  LENGTH tmp_cmindsol cmindsol $200;
+  RETAIN tmp_cmindsol;
+  SET work.cm_medic (RENAME = (cmindsol=_cmindsol));
+  
+  BY usubjid cmspid;
+  
+  IF FIRST.cmspid THEN DO;  tmp_cmindsol = ' ';   END;
+  tmp_cmindsol = CATX(', ', tmp_cmindsol, _cmindsol);
+  
+  IF LAST.cmspid THEN DO;
+     cmindsol = tmp_cmindsol; 
+     OUTPUT;
+  END;
+RUN;
