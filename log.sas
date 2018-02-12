@@ -37,3 +37,8 @@ filename logfile "&LogOutFile";
 
 proc printto log=logfile;
 run;
+
+/* do somthing */
+
+proc printto;
+run;
