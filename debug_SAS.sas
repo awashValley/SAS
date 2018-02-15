@@ -46,3 +46,8 @@
    /* [Thur 26MAY2016]. Flag things you would like to change latter.  
                         - The string "workOnThisPart" is mandatory, but the other text is optional. */
       %put "ERR2" "OR: workOnThisPart; blah blah."; 
+      
+  /* [15-FEB-2018]. Refresh SAS if it is hanging somewhere. */
+  /* source: https://communities.sas.com/t5/Base-SAS-Programming/quot-NOTE-49-169-The-meaning-of-an-identifier-after-a-quoted/td-p/121796*/
+  ;*%mend;*);*';*";**/;
+  run;
