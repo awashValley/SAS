@@ -42,3 +42,17 @@ run;
 
 proc printto;
 run;
+
+/* [21FEB2018]. Colorized Text in the Log? */
+/* source: https://communities.sas.com/t5/SAS-Enterprise-Guide/Colorized-Text-in-the-EG-Log/td-p/251828 */
+filename rev1 temp;
+%log4sas();
+%log4sas_appender(testout, "FileRefAppender", 'fileref=rev1');
+%log4sas_logger(logger, 'level=trace appender-ref=(testout)');
+
+%log4sas_info(logger,"Test INFO message");
+%log4sas_debug(logger,"Test DEBUG message");
+%log4sas_trace(logger,"Test TRACE message");
+%log4sas_warn(logger,"Test WARNING message");
+%log4sas_error(logger,"Test ERROR message");
+%log4sas_fatal(logger,"Test FATAL message");
