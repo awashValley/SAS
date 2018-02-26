@@ -287,14 +287,4 @@ PROC SQL NOPRINT;
   INNER JOIN work.usubjid_dm     B ON A.usubjid1 = B.usubjid2;
 QUIT;
 
-/* [26-Feb-2018]. Remove space from column name. */
-%let rename_obsClass =;
-proc sql;
-	select cat(name, ' = ', compress(name)) into :rename_obsClass separated by ' ' from
-	dictionary.columns where libname = 'WORK' and  
-	                         memname='_STAND_PREPRO' and
-	                         name like "Observation%"
-	;
-quit;
-
 
