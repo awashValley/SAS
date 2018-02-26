@@ -657,3 +657,12 @@ DATA work.cm_medic2;
      OUTPUT;
   END;
 RUN;
+
+/* [26-Feb-2018]. Remove space from column name. */
+options validvarname = any;
+data work._stand_prepro2; 
+	set _stand_prepro (rename = ("Observation Class"n = "Observation_Class"n)); 
+run;
+
+
+
