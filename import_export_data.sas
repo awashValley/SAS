@@ -47,6 +47,7 @@ DATA  WORK._macvar;
 RUN;
 
 /* [27-Feb-2018]. Remove blank columns imported from Excel using RANGE option in PROC IMPORT. */
+/* source: https://communities.sas.com/t5/SAS-Data-Management/Importing-Excel-Files-with-namerow-and-range-options/td-p/246709 */
 proc import out=work._test DATAFILE= "&xls_smapping." DBMS=xls REPLACE;          
 	range = "&tabIn.$A:K";       /* The RANGE option allows us to remove blank columns. */
 	getnames = YES; 
