@@ -45,3 +45,9 @@ DATA  WORK._macvar;
 	INPUT var1-var25;
 	IF _ERROR_ then call symputx('_EFIERR_',1); 
 RUN;
+
+/* [27-Feb-2018]. Remove blank columns imported from Excel using RANGE option in PROC IMPORT. */
+proc import out=work._test DATAFILE= "&xls_smapping." DBMS=xls REPLACE;          
+	range = "&tabIn.$A:K";       /* The RANGE option allows us to remove blank columns. */
+	getnames = YES; 
+run;
