@@ -664,5 +664,13 @@ data work._stand_prepro2;
 	set _stand_prepro (rename = ("Observation Class"n = "Observation_Class"n)); 
 run;
 
+/* [28-Feb-2018]. Create blank dataset. */
+data work._eShare_02_all_processed;
+    length Class $ 15 Source $ 10 
+    Order 8 Domain $ 16 Name $ 40 Label $ 46 Type $ 9 
+    Controlled_terms $ 14 Role $ 50 Core $ 9;
+    stop;
+    call missing(of _all_);
+run;
 
 
