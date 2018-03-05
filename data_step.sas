@@ -673,4 +673,42 @@ data work._eShare_02_all_processed;
     call missing(of _all_);
 run;
 
+/* [05-Mar-2018]. Concatenate rows to single string. */
+/* Derive macro variables for the new length/format. */
+%let len_eShare_vars=;
+%let fmt_eShare_vars=;
+
+data code (keep = ptrn: code_length code_format);
+	length code_length code_format $ 2000;
+	set work._esh_format2 end=last;
+
+	retain code_length;
+	retain code_format;
+
+	if _n_ = 1 then do;
+		tmp_length = catx(' ', 'if index(name, ', ptrn_name, ') then', cats('length = "', strip(ptrn_length), '";'));
+		tmp_format = catx(' ', 'if index(name, ', ptrn_name, ') then', cats('format = "', strip(ptrn_format), '";'));
+	end;
+	else do;
+		tmp_length = catx(' ', 'else if index(name, ', ptrn_name, ') then', cats('length = "', strip(ptrn_length), '";'));
+		tmp_format = catx(' ', 'else if index(name, ', ptrn_name, ') then', cats('format = "', strip(ptrn_format), '";'));
+	end;
+
+	code_length = catx(' ', code_length, tmp_length);
+	code_format = catx(' ', code_format, tmp_format);
+
+	if last then output;
+run;
+
+proc sql noprint;
+	select %nrstr(code_length) into :len_eShare_vars
+	from work.code
+	;
+
+	select %nrstr(code_format) into :fmt_eShare_vars
+	from work.code
+	;
+quit;
+
+
 
