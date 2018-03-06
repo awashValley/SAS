@@ -105,3 +105,32 @@ data cm;
 run;
 
 %drop_vars(dsin = work.cm);
+
+/* [06-Mar-2018]. Use prxmatch to match strings ending in a certain word */
+/* - source: http://support.sas.com/kb/38/719.html */
+/* Apply to test dataset. */
+	data test2;
+		length length 8 
+			   format $ 20
+			   ;
+		set test;
+		
+		/* Derive length variable. */
+		if      strip(type) = 'C' then do;
+			if      prxmatch("m/TEST$/oi", strip(name)) > 0 then length = 40;
+			else if prxmatch("m/CD$/oi",   strip(name)) > 0 then length = 10;
+			else                                   length = 200;
+		end;
+		else if strip(type) = 'N' then do;
+												  length = 8;
+		end;
+		
+		* Define length for user-defined variables. ;
+		&len_eShare_vars;
+		
+		/* Derive format. */
+		format = "";
+		
+		* Define format for user-defined variables. ;
+		&fmt_eShare_vars;
+	run;
