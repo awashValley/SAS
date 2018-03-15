@@ -287,4 +287,19 @@ PROC SQL NOPRINT;
   INNER JOIN work.usubjid_dm     B ON A.usubjid1 = B.usubjid2;
 QUIT;
 
+/* [15-Mar-2018]. Assign length in Proc SQL. */
+  proc sql noprint;
+    create table work.dsTab_user as
+    select distinct(domain) format=$30. length=30 
+    from work._tables_user
+    order by domain
+    ;
+
+    create table work.dsTab_eShare as
+    select distinct(domain) format=$30. length=30 
+    from work.metadata_eshare
+    order by domain
+    ;
+  quit;
+
 
