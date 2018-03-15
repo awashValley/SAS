@@ -63,3 +63,26 @@
        
        %OUT: %END;
 %MEND GETCON; 
+
+/* Another %GOTO example from Joris D. */
+%LET ERR = ;
+
+%MACRO TEST;
+  %IF 1 = 1 %THEN %LET ERR = HELLO WORLD; %MEND;
+
+%MACRO NEXT;
+  %IF &ERR ^= %STR() %THEN %DO;
+    %PUT NOT RUNNING. THERE WAS AN ERR SOMEWHERR: &ERR;
+    %GOTO M_EXIT;
+  %END;
+  
+  DATA work.not-run;
+  RUN;
+  
+  %M_EXIT:
+    %PUT END;
+%MEND;
+
+%TESt;
+%NEXT;
+
