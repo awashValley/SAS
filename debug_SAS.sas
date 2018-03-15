@@ -90,24 +90,36 @@
 %LET ERR = ;
 
 %MACRO TEST;
-	%IF 1 = 1 %THEN %LET ERR = HELLO WORLD; 
+        %IF 1 = 1 %THEN %DO;
+           %LET ERR = HELLO WORLD;
+            %GOTO M_EXIT2;
+       %END;
 
-	%MACRO NEXT;
-	  %IF &ERR ^= %STR() %THEN %DO;
-		%PUT NOT RUNNING. THERE WAS AN ERR SOMEWHERR: &ERR;
-		%GOTO M_EXIT;
-	  %END;
-	  
-	  DATA work.not-run;
-	  RUN;
-	  
-	  %M_EXIT:
-		%PUT END;
-	%MEND NEXT;
-       %NEXT;
+        %MACRO NEXT;
+          %IF &ERR ^= %STR() %THEN %DO;
+                %PUT NOT RUNNING. THERE WAS AN ERR SOMEWHERR: &ERR;
+                %GOTO M_EXIT;
+          %END;
+
+          DATA work.not_run;
+                set sashelp.class;
+          RUN;
+
+          %M_EXIT:
+                %PUT END;
+        %MEND NEXT;
+        %NEXT;
+
+        data class;
+                set sashelp.class;
+        run;
+
+       %M_EXIT2:
+         %PUT SECOND END;
 
 %MEND TEST;
 
 %TESt;
+
 
 
