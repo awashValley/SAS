@@ -86,3 +86,28 @@
 %TESt;
 %NEXT;
 
+/* Another %GOTO example -> when the second macro is inside the first macro. */
+%LET ERR = ;
+
+%MACRO TEST;
+	%IF 1 = 1 %THEN %LET ERR = HELLO WORLD; 
+
+	%MACRO NEXT;
+	  %IF &ERR ^= %STR() %THEN %DO;
+		%PUT NOT RUNNING. THERE WAS AN ERR SOMEWHERR: &ERR;
+		%GOTO M_EXIT;
+	  %END;
+	  
+	  DATA work.not-run;
+	  RUN;
+	  
+	  %M_EXIT:
+		%PUT END;
+	%MEND NEXT;
+       %NEXT;
+
+%MEND TEST;
+
+%TESt;
+
+
