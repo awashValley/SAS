@@ -51,3 +51,15 @@
   /* source: https://communities.sas.com/t5/Base-SAS-Programming/quot-NOTE-49-169-The-meaning-of-an-identifier-after-a-quoted/td-p/121796*/
   ;*%mend;*);*';*";**/;
   run;
+
+
+/* [15-Mar-2018]. Terminate execution of macro using %goto */
+%MACRO GETCON;
+       %DO I = 1 %TO &N;
+       %IF &&M&I = 0 %THEN %GOTO OUT;
+       
+       IF CON = &&M&I THEN CON&I = 1;
+       ELSE CON&I = 0;
+       
+       %OUT: %END;
+%MEND GETCON; 
