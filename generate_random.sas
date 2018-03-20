@@ -48,4 +48,38 @@
   QUIT;
 
 %MEND  gen_random;
+
+/* [20-Mar-2018]. Generate dataset. */
+/* - Source: cc07_SQL or not SQL When Performing Many-to-Many Merge */
+data lab;
+	length lbtestcd $ 10 lbstresu $ 20 ;
+	retain lbtestcd "CREAT" lbstresu "UMOL/L";
+
+	do usubjid=1001 to 6000;
+		if ranuni(0)<0.5 then sexcd=1;
+		else sexcd=2;
+
+		age=floor(47+sqrt(81)*rannor(1688));
+		lbdt=floor(14535+sqrt(219950)*rannor(1688));
+
+		do visitnum= 1 to 6 ;
+			lbdt=lbdt+30;
+			lbstresn = 70+sqrt(200)*rannor(1688);
+
+			format lbdt yymmdd10.;
+
+			label
+				usubjid ='Unique Subject Identifier'
+				sexcd ='Sex Code 1=male 2=female'
+				age ='Age in Years'
+				lbdt ='Parameter Measurement Date'
+				lbstresn ='Parameter Value'
+				lbtestcd ='Parameter Name'
+				lbstresu ='Parameter Unit'
+				visitnum ='Visit identifier (numeric)'
+			;
+			output;
+		end;
+	end;
+run;
      
