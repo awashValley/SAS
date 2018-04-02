@@ -1,8 +1,8 @@
 %macro power_fc (rr        =,
-			           ref_prop  =,
-				         hypo_type =,
-				         test_type =,
-				         debugme   =n);
+			     ref_prop  =,
+				 hypo_type =,
+				 test_type =,
+				 debugme   =n);
 							  
 	/* Turn on/off debugger. */
 	%if       %upcase(&debugme.) eq Y     %then %do;
