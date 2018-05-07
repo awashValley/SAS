@@ -52,3 +52,19 @@ proc import out=work._test DATAFILE= "&xls_smapping." DBMS=xls REPLACE;
 	range = "&tabIn.$A:K";       /* The RANGE option allows us to remove blank columns. */
 	getnames = YES; 
 run;
+
+/* [07-May-2018]. Import CSV file using DATA step. */
+/* - Attention: PROC IMPORT requires SAS ACCES to PC Files. This runs us into SAS license violations. Instead, use INFILE statement. */
+filename rawdt "&rawdata.\myfile.csv";
+
+data work.01;
+  infile rawdt dsd dlm=',' lrecl=2000 missover;
+  length studyid domain subjid usubjid ftseq ftgrpid 
+         ftloc ftrunid fttest fttestcd fttestcat 
+         visit visitnum fttpt fttptnum epoch ftdtc 
+         qnam ftorres ftorresu sourcefile $ 200;
+  input studyid domain subjid usubjid ftseq ftgrpid 
+        ftloc ftrunid fttest fttestcd fttestcat visit 
+        visitnum fttpt fttptnum epoch ftdtc qnam ftorres 
+        ftorresu sourcefile $;
+run;
