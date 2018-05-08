@@ -7,3 +7,5 @@
 /* Suppress multiple lengths */
    OPTIONS VARLENCHK = NOWARN
 
+/* [08-May-2018]. To upcase column names in SAS */
+options validvarname=upcase;      * To upcaase column names. ;
